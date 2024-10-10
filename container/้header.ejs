@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 40px 50px;
+            color: white;
+        }
+
+        .header1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .logo {
+            flex-shrink: 0;
+            margin-right: 20px;
+            margin-left: -550px;
+        }
+
+
+        .logo img {
+            width: 156px;
+            height: 155px;
+            border-radius: 15px;
+
+        }
+
+        .info {
+            text-align: center;
+            margin-left: -300px;
+            margin-top: -150px;
+        }
+
+        .info h1 {
+            font-size: 32px;
+            margin: 0;
+            color: black;
+        }
+
+        .info p {
+            font-size: 16px;
+            color: #929090;
+        }
+
+        .join-btn {
+            background-color: white;
+            color: #F0569A;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid #F0569A;
+            margin-top: 12px;
+            position: relative;
+            top: -80px;
+            left: 300px;
+        }
+
+        .join-btn:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            list-style: none;
+            padding: 0;
+            margin-left: -120px;
+            margin-top: 70px;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #F0569A;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid #F0569A;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="header"></div>
+    <div class="header1">
+        <div class="logo">
+            <img src="https://storage.googleapis.com/atime-media-prod/editor/content/d56c4558-c78a-4891-9456-e536e3538a71.jpeg"
+                alt="4EVE Image">
+        </div>
+        <div class="info">
+            <h1>4EVE</h1>
+            <p>70,929 fans</p>
+        </div>
+        <button class="join-btn">✩ เข้าร่วม</button>
+        <ul class="nav-bar">
+            <li><a href="#">ประวัติ</a></li>
+            <li><a href="#">ติดตามผลงานศิลปิน</a></li>
+            <li><a href="#">เว็บบอร์ด</a></li>
+        </ul>
+    </div>
+    </header>
+</body>
+
+</html>
