@@ -32,7 +32,7 @@ const ifNotLoggedin = (req, res, next) => {
 const ifLoggedin = (req, res, next) => {
     console.log('ifLoggedin middleware triggered');
     if (req.session.isLoggedIn) {
-        return res.redirect('/home');
+        return res.redirect('/main');
     }
     next();
 };
@@ -43,7 +43,7 @@ const ifLoggedin = (req, res, next) => {
 app.get('/', ifNotLoggedin, (req, res) => {
     dbConnection.execute("SELECT `name` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            res.render('home', {
+            res.render('main', {
                 name: rows[0].name
             });
         })
@@ -55,10 +55,10 @@ app.get('/', ifNotLoggedin, (req, res) => {
 });// END OF ROOT PAGE
 
 // HOME PAGE
-app.get('/home', ifNotLoggedin, (req, res) => {
+app.get('/main', ifNotLoggedin, (req, res) => {
     dbConnection.execute("SELECT `name` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            res.render('home', {
+            res.render('main', {
                 name: rows[0].name
             });
         })
@@ -70,9 +70,10 @@ app.get('/home', ifNotLoggedin, (req, res) => {
 });// END OF HOME PAGE
 
 // REGISTER PAGE
-app.get('/login', ifLoggedin, (req, res) => {
-    res.render('login'); // render login.ejs
+app.get('/register',(req, res) => {
+    res.render('register');
 });
+
 app.post('/register', ifLoggedin,
     // Post data validation(using express-validator)
     [
@@ -87,17 +88,20 @@ app.post('/register', ifLoggedin,
         }),
         body('user_name', 'Username is Empty!').trim().not().isEmpty(),
         body('user_pass', 'The password must be of minimum length 6 characters').trim().isLength({ min: 6 }),
+        body('first_name', 'First name is required').trim().not().isEmpty(),
+        body('last_name', 'Last name is required').trim().not().isEmpty(),
     ], // end of post data validation
     (req, res, next) => {
 
         const validation_result = validationResult(req);
-        const { user_name, user_pass, user_email } = req.body;
+        const { user_name, user_pass, user_email, first_name, last_name } = req.body;
+
         // IF validation_result HAS NO ERROR
         if (validation_result.isEmpty()) {
             // Password encryption (using bcryptjs)
             bcrypt.hash(user_pass, 12).then((hash_pass) => {
                 // INSERTING USER INTO DATABASE
-                dbConnection.execute("INSERT INTO `users`(`name`,`email`,`password`) VALUES(?,?,?)", [user_name, user_email, hash_pass])
+                dbConnection.execute("INSERT INTO `users`(`first_name`, `last_name`, `name`, `email`, `password`) VALUES(?,?,?,?,?)", [first_name, last_name, user_name, user_email, hash_pass])
                     .then(result => {
                         res.redirect('/login');
                     }).catch(err => {
@@ -111,23 +115,26 @@ app.post('/register', ifLoggedin,
                     console.error(err);
                     res.status(500).send('Server Error');
                 });
-        }
-        else {
+        } else {
             // COLLECT ALL THE VALIDATION ERRORS
             let allErrors = validation_result.errors.map((error) => {
                 return error.msg;
             });
-            // RENDERING login-register PAGE WITH VALIDATION ERRORS
+            // RENDERING REGISTER PAGE WITH VALIDATION ERRORS
             res.render('register', {
                 register_error: allErrors,
                 old_data: req.body
             });
         }
     }
-);// END OF REGISTER PAGE
+);
+// END OF REGISTER PAGE
 
 // LOGIN PAGE
-app.post('/', ifLoggedin, [
+app.get('/login', ifLoggedin, (req, res) => {
+    res.render('login'); // render login.ejs
+});
+app.post('/login', ifLoggedin, [
     body('user_email').custom((value) => {
         return dbConnection.execute('SELECT email FROM users WHERE email=?', [value])
             .then(([rows]) => {
@@ -150,7 +157,7 @@ app.post('/', ifLoggedin, [
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
 
-                        res.redirect('/home');
+                        res.redirect('/main');
                     }
                     else {
                         res.render('login', {
@@ -187,6 +194,69 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 // END OF LOGOUT
+
+// Route สำหรับแสดงฟอร์ม
+app.get('/submit_song', (req, res) => {
+    res.render('submit_song'); // render submit_song.ejs
+});
+
+// Route สำหรับจัดการข้อมูลจากฟอร์ม
+app.post('/submit_song', async (req, res) => {
+    const { song_name, artist_name, youtube_url, spotify_url, release_date } = req.body;
+
+    // ตรวจสอบการป้อนข้อมูล
+    if (!song_name || !artist_name || !youtube_url || !release_date) {
+        return res.render('submit_song', {
+            error: 'All fields are required!',
+            old_data: req.body
+        });
+    }
+
+    try {
+        // เพิ่มข้อมูลเพลงลงในฐานข้อมูล
+        const query = "INSERT INTO `submit_song` (`song_name`, `artist_name`, `youtube_url`, `spotify_url`, `release_date`) VALUES (?, ?, ?, ?, ?)";
+        const values = [song_name, artist_name, youtube_url, spotify_url || null, release_date];
+
+        const [result] = await dbConnection.execute(query, values);
+        console.log('Insert result:', result);
+
+        res.redirect('/login'); // รีไดเร็กไปหน้า login หลังจากกด submit
+    } catch (err) {
+        console.error('Database insertion error:', err.message); // ล็อกข้อผิดพลาดที่เกิดขึ้น
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
+app.get('/main', (req, res) => {
+    res.render('main'); // render submit_song.ejs
+});
+
+app.get('/profile', (req, res) => {
+    res.render('profile'); // render submit_song.ejs
+});
+
+app.get('/webboard', (req, res) => {
+    res.render('webboard'); // render submit_song.ejs
+});
+
+
+app.get('/Tracking_channel', (req, res) => {
+    res.render('Tracking_channel'); // render submit_song.ejs
+});
+
+app.get('/artist', (req, res) => {
+    res.render('artist'); // render submit_song.ejs
+});
+
+app.get('/song', (req, res) => {
+    res.render('song'); // render submit_song.ejs
+});
+
+app.get('/search', (req, res) => {
+    res.render('search'); // render submit_song.ejs
+});
 
 app.use('/', (req, res) => {
     res.status(404).send('<h1>404 Page Not Found!</h1>');
