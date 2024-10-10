@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าโปรไฟล์</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fce4ec;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+ 
+/* เฮดเดอร์ */
+header {
+    background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+    padding: 40px;
+}
+ 
+.header-content h1 {
+    color: white;
+}
+ 
+/* ฟุตเตอร์ */
+footer {
+    background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+    padding: 60px;
+    text-align: center;
+}
+ 
+.logout-btn {
+    background-color: #f06292;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+ 
+/* คอนเทนต์โปรไฟล์ */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+ 
+.ri-pencil-line {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer; /* แสดงว่าเป็นปุ่ม */
+    transition: background-color 0.3s ease;
+}
+ 
+.ri-pencil-line:hover {
+    background: #f06292;
+}
+ 
+.profile {
+    text-align: center;
+    display: flex;
+}
+ 
+.profile-image {
+    position: relative;
+}
+ 
+.profile-image img {
+    width: 150px;
+    height: 149px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-image button{
+    position: relative;
+    background-color: #ff9fdf;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 20px;
+}
+ 
+.profile-text{
+    margin-top: 50px;
+    margin-left: 50px;
+    text-align: left;
+}
+ 
+.profile-text h2{
+    font-size: 50px;
+}
+ 
+.profile-text p{
+    font-size: 16px;
+ 
+}
+ 
+.edit-image-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+ 
+.edit-info {
+    background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 25px;
+    width: 40%;
+    margin-left: 250px;
+    margin-right: 250px;
+}
+ 
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+ 
+.input-group label {
+   flex: 1;
+    color: rgb(19, 19, 19);
+    margin-bottom: 5px;
+    margin-left: 25PX;
+   
+}
+ 
+.input-group input, .input-group select {
+    width: 70%;
+    padding: 8px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+}
+ 
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+ 
+.submit-btn {
+    background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+    color: white;
+    border:1px solid #ff9fdf;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+ 
+.submit-btn:hover {
+    background: #f06292;
+}
+ 
+.logout-btn{
+    color: #6D6D6D;
+    background-color: #fff;
+    border:1px solid #6D6D6D;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+ 
+.logout-btn:hover {
+    background-color: #6D6D6D;
+    color: #fff;
+}
+</style>
+<body>
+ 
+    <header>
+        <div class="header-content">
+        </div>
+    </header>
+ 
+    <div class="profile-container">
+        <div class="profile">
+            <div class="profile-image">
+                <img src="https://p16-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/o0iL4A2yeEMgBuhAizivD2yCQSrPIjSAeKJgEB~tplv-tej9nj120t-origin.webp" alt="Profile" id="profileImage">
+                <input type="file" id="uploadImage" accept="image/*" style="display:none;">
+                <button class="ri-pencil-line" onclick="document.getElementById('uploadImage').click();">
+                </button>
+            </div>
+            <div class="profile-text">
+                <h2>Dum Samit</h2>
+                <i class="ri-user-add-line">   13 กำลังติดตาม</i>
+            </div>
+        </div>
+ 
+        <div class="edit-info">
+            <form id="userForm">
+                <div class="input-group">
+                    <label for="username">ชื่อผู้ใช้</label>
+                    <input type="text" id="username" value="Dum Samit">
+                </div>
+ 
+                <div class="input-group">
+                    <label for="lastname">ชื่อ-นามสกุล</label>
+                    <input type="text" id="lastname" value="ดำ สมิด">
+                </div>
+ 
+                <div class="input-group">
+                    <label for="gender">เพศ</label>
+                    <select id="gender">
+                        <option value="male">ผู้ชาย</option>
+                        <option value="female">ผู้หญิง</option>
+                        <option value="unspecified">ไม่ระบุ</option>
+                    </select>
+                </div>
+ 
+            </form>
+        </div>
+ 
+        <div class="a">
+            <button type="submit" class="submit-btn">บันทึกข้อมูล</button>
+            <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+    </div>
+ 
+ 
+    <footer>
+ 
+    </footer>
+ 
+    <script>
+        document.getElementById('uploadImage').addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profileImage').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+ 
+// ฟังก์ชันบันทึกข้อมูล
+document.getElementById('userForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+ 
+    const username = document.getElementById('username').value;
+    const lastname = document.getElementById('lastname').value;
+    const gender = document.getElementById('gender').value;
+ 
+    alert(`บันทึกข้อมูลสำเร็จ:\nชื่อผู้ใช้: ${username}\nชื่อ-นามสกุล: ${lastname}\nเพศ: ${gender}`);
+});
+ 
+    </script>
+</body>
+</html>
+ 
+ 
