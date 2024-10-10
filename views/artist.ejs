@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4EVE</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            text-align: center;
+            padding: 50px 0;
+            color: white;
+        }
+
+        .header1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .mm {
+            text-align: center;
+            margin-left: 300px;
+            margin-top: -150px;
+        }
+
+        .vv {
+            flex-shrink: 0;
+            margin-right: 20px;
+            margin-left: -550px;
+        }
+
+        .vv img {
+            width: 156px;
+            height: 155px;
+            border-radius: 15px;
+        }
+
+
+        .vv h1 {
+            text-align: center;
+            margin-left: -300px;
+            margin-top: -150px;
+        }
+
+        .vv span {
+            font-size: 32px;
+            margin: 0;
+            color: black;
+        }
+
+        .ll {
+            font-size: 16px;
+            color: #929090;
+        }
+
+        .join-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .join-btn {
+            background-color: white;
+            color: #F0569A;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid #F0569A;
+            margin-top: 12px;
+            position: relative;
+            top: -80px;
+            left: 300px;
+        }
+
+        .join-btn:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+
+        .join-container {
+            margin-bottom: 20px;
+            /* ระยะห่างระหว่างปุ่มเข้าร่วมกับปุ่มนำทาง */
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            list-style: none;
+            padding: 0;
+            margin-left: -120px;
+            margin-top: 70px;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #F0569A;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid #F0569A;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+
+        .pink-button {
+            background-color: #fff;
+            color: #f280a1;
+            border: 2px solid #f280a1;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pink-button:hover {
+            background-color: #f280a1;
+            color: #fff;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            border-radius: 15px;
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 50px;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .profile-info a {
+            color: #f280a1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-container {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title-container h1 {
+            margin-right: -80px;
+            /* Adds space between 4EVE and the fans count */
+            margin-top: 20px;
+
+        }
+
+        .title-container span {
+            font-size: 16px;
+            /* Adjusts the size of the fans count */
+            margin-top: 50px;
+            margin-right: -120px;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+    </div>
+    <div class="header1">
+        <div class="vv">
+            <img src="https://www.hisopartyofficial.com/backend/web/uploads/images/202303/1/10291/dc8f28fd9df5a1817bc93d2c7159051b.jpg"
+                alt="4EVE Image">
+            <div class="mm">
+                <div class="title-container">
+                    <h1>4EVE</h1>
+                    <span>70,929 fans</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="ll">
+            <button class="join-btn">✩ เข้าร่วม</button>
+        </div>
+        <ul class="nav-bar">
+            <li><a href="http://localhost:3000/artist?">ประวัติ</a></li>
+            <li><a href="http://localhost:3000/Tracking_channel">ติดตามผลงานศิลปิน</a></li>
+            <li><a href="http://localhost:3000/webboard">เว็บบอร์ด</a></li>
+        </ul>
+    </div>
+    <div class="profile-container">
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140901/1611644936_97641_1.jpg"
+                alt="Fai">
+            <div class="profile-info">
+                <h3>ฝ้าย - ณัฐธยาน์ บุตรธุระ (Fai - Nattaya Buttura)</h3>
+                <p>อายุ 21 ปี จากเชียงใหม่</p>
+                <p>IG: <a href="https://instagram.com/callmebanananana">@callmebanananana</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140855/1611644930_46800_1.jpg"
+                alt="Punch">
+            <div class="profile-info">
+                <h3>พั้นช์-ทิพานัน นิลสยาม (Punch-Tipanan Nilsiam)</h3>
+                <p>อายุ 20 ปี จากกรุงเทพมหานคร</p>
+                <p>IG: <a href="https://instagram.com/ppunnch">@ppunnch</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140849/1611644924_31933_2.jpg"
+                alt="Mind">
+            <div class="profile-info">
+                <h3>มายด์-อาทิตยา ตรีบุดารักษ์ (Mind-Attitaya Tribudarak)</h3>
+                <p>อายุ 25 ปี จากชลบุรี</p>
+                <p>IG: <a href="https://instagram.com/._tiya_">@._tiya_</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140914/1611644948_36108_2.jpg"
+                alt="Aheye">
+            <div class="profile-info">
+                <h3>อ๊ะอาย-กรณิศ เล้าสุบินประเสริฐ (Aheye-Korranid Loasubinprasoet)</h3>
+                <p>อายุ 19 ปี จากกรุงเทพมหานคร</p>
+                <p>IG: <a href="https://instagram.com/ah.eye.korranid">@ah.eye.korranid</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26141006/1611645001_21759_2.jpg"
+                alt="Hannah">
+            <div class="profile-info">
+                <h3>แฮนน่า-แฮนนาห์ โรสเบลิ่ยมบรูม (Hannah-Hannah Rosenbloom)</h3>
+                <p>อายุ 23 ปี จาก สปป.ลาว</p>
+                <p>IG: <a href="https://instagram.com/hannah_kmz">@hannah_kmz</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140959/1611644995_51196_1.jpg"
+                alt="Jorin">
+            <div class="profile-info">
+                <h3>โจริญ-โจริญ คัมภีรพันธุ์ (Jorin-Jorin Khumpiraphan)</h3>
+                <p>อายุ 24 ปี จากเชียงใหม่</p>
+                <p>IG: <a href="https://instagram.com/jorinja">@jorinja</a></p>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://images.workpointtoday.com/workpointnews/2021/01/26140947/1611644982_95888_1.jpg"
+                alt="Taoom">
+            <div class="profile-info">
+                <h3>ต้าวออม เบญญาภา อุ่นจิตร (Taoom-Benyapa Unjit)</h3>
+                <p>อายุ 24 ปี จากกรุงเทพมหานคร</p>
+                <p>IG: <a href="https://instagram.com/taaoem">@taaoem</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-container">
+    </div>
+</body>
+
+</html>
