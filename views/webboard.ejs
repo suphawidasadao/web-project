@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4EVE Fan Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+
+.header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 40px 50px;
+            color: white;
+        }
+
+        .header1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .logo {
+            flex-shrink: 0;
+            margin-right: 20px;
+            margin-left: -550px;
+        }
+
+
+        .logo img {
+            width: 156px;
+            height: 155px;
+            border-radius: 15px;
+
+        }
+
+        .info {
+            text-align: center;
+            margin-left: -300px;
+            margin-top: -150px;
+        }
+
+        .info h1 {
+            font-size: 32px;
+            margin: 0;
+            color: black;
+        }
+
+        .info p {
+            font-size: 16px;
+            color: #929090;
+        }
+
+        .join-btn {
+            background-color: white;
+            color: #F0569A;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid #F0569A;
+            margin-top: 12px;
+            position: relative;
+            top: -80px;
+            left: 300px;
+        }
+
+
+
+        .join-btn:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            list-style: none;
+            padding: 0;
+            margin-left: -120px;
+            margin-top: 70px;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #F0569A;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid #F0569A;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #F0569A;
+            color: white;
+        }
+    /* Modal Styles */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 600px;
+        /* ลดขนาดความกว้าง */
+        width: 100%;
+        /* ปรับลดความกว้าง */
+        max-height: 80%;
+        /* กำหนดความสูงสูงสุด */
+        position: relative;
+        overflow-x: auto;
+        /* เพิ่มการเลื่อนแนวนอน */
+        overflow-y: auto;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #FF56A1;
+    }
+
+    .modal-content img {
+        max-width: 50%;
+        /* Ensure image fits within modal width */
+        height: auto;
+        /* Maintain aspect ratio */
+        
+    }
+</style>
+
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header>
+        <div class="header"></div>
+        <div class="header1">
+            <div class="logo">
+                <img src="https://storage.googleapis.com/atime-media-prod/editor/content/d56c4558-c78a-4891-9456-e536e3538a71.jpeg"
+                    alt="4EVE Image">
+            </div>
+            <div class="info">
+                <h1>4EVE</h1>
+                <p>70,929 fans</p>
+            </div>
+            <button class="join-btn">✩ เข้าร่วม</button>
+            <ul class="nav-bar">
+                <li><a href="#">ประวัติ</a></li>
+                <li><a href="#">ติดตามผลงานศิลปิน</a></li>
+                <li><a href="#">เว็บบอร์ด</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Fan Feed Section -->
+    <div class="max-w-4xl mx-auto mt-10 w-[800px] rounded-lg mb-2">
+        <h2 class="text-xl font-semibold mb-4">FAN FEED</h2>
+        <div class="grid grid-cols-3 gap-4 pb-20">
+            <!-- Fan Post Cards -->
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="https://thethaiger.com/th/wp-content/uploads/2022/04/callmebanananana_278314596_2871343649678283_6956801231131824860_n-656x820.jpg"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat the card 5 more times -->
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="https://thethaiger.com/th/wp-content/uploads/2022/04/jorinja_277115308_727658871562718_1886721758610100878_n-656x820.jpg"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="https://today-obs.line-scdn.net/0hzs_aL1guJVxiGDcx_ZxaC1pOKS1Rfj9VQHljPBIeemVGNGBaVn12P0YdL3BHLGRaQn9uPkIQKG1IKmtYWQ/w644"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="https://s359.kapook.com/r/600/auto/pagebuilder/7ecb664c-e3ef-4a26-952d-85650c4cc45d.jpg"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="https://www.thebangkokinsight.com/wp-content/uploads/2023/08/%E0%B8%AD%E0%B9%8A%E0%B8%B0%E0%B8%AD%E0%B8%B2%E0%B8%A2366118642_300184725868006_9068132732377691414_n.jpg"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg post-card">
+                <img src="src/iGOMaVIoPv0OnxuUdZA_2-transformed.jpg" alt="Fan Post"
+                    class="w-full rounded-lg mb-2 post-image">
+                <div class="flex items-center justify-between text-pink-500">
+                    <div class="flex items-center space-x-1 favorite-btn">
+                        <span class="material-icons">favorite</span>
+                        <p>5</p>
+                    </div>
+                    <div class="flex items-center space-x-1 comment-btn">
+                        <span class="material-icons">comment</span>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-r p-20" style="background: linear-gradient(to bottom, #ff9fdf, #F0569A);">
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="text-xl font-semibold mb-2" id="modal-title">Post Details</h2>
+            <div class="flex items-center justify-center">
+                <img id="modal-image" src="" alt="Post Image" class="w-full rounded-lg mb-4 items-center" />
+            </div>
+            <p id="modal-text" class="my-4">Details here</p>
+            <div class="mb-4">
+                <div class="flex items-start mb-3">
+                    <img src="https://via.placeholder.com/40" alt="Commenter Profile"
+                        class="rounded-full w-10 h-10 mr-3">
+                    <div>
+                        <span class="font-bold text-sm">Commenter 1</span>
+                        <p class="text-sm text-gray-600 mt-1">This is a comment on the post. It provides feedback or
+                            thoughts related to the content.</p>
+                    </div>
+                </div>
+                <div class="flex items-start mb-3">
+                    <img src="https://via.placeholder.com/40" alt="Commenter Profile"
+                        class="rounded-full w-12 h-10 mr-3">
+                    <div>
+                        <span class="font-bold text-sm">Commenter 2</span>
+                        <p class="text-sm text-gray-600 mt-1">Another comment on the post. Additional thoughts or
+                            discussion points are included here.</p>
+                    </div>
+                </div>
+            </div>
+            <textarea id="comment-box" class="w-full p-2 border border-gray-300 rounded-lg" rows="1"
+                placeholder="Add your comment..."></textarea>
+            <button id="submit-comment"
+                class="mt-2 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full">
+                Submit
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // ค้นหาทุกการ์ดโพสต์
+        const postCards = document.querySelectorAll('.post-card');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const closeBtn = document.querySelector('.close-btn');
+
+        // Loop ผ่านการ์ดแต่ละใบเพื่อตรวจจับการคลิก
+        postCards.forEach(card => {
+            card.addEventListener('click', function () {
+                // แสดงป็อปอัป
+                modal.style.display = 'flex';
+
+                // ตั้งค่าเนื้อหาของป็อปอัป
+                const postImage = this.querySelector('.post-image').src;
+                modalImage.src = postImage;
+                modalTitle.textContent = 'Post Details'; // คุณสามารถตั้งค่าเนื้อหาอื่น ๆ ที่ต้องการแสดงได้ที่นี่
+                modalText.textContent = 'รายละเอียดของโพสต์นี้...';
+            });
+        });
+
+        // ฟังก์ชันปิดป็อปอัป
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        // ปิดป็อปอัปเมื่อคลิกนอกป็อปอัป
+        window.addEventListener('click', function (e) {
+            if (e.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
