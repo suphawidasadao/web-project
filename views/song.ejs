@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billboard Month</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        .header {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            text-align: center;
+            padding: 50px 0;
+            color: white;
+        }
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4c1d3;
+        }
+ 
+        .container {
+            position: relative;
+            padding: 20px 0;
+        }
+        h1 {
+    font-family: 'Bungee', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #7a1d3f;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+    padding: 30px 0;
+    margin-left: 230px; /* เพิ่มระยะห่างจากขอบซ้าย */
+    text-align: left; /* จัดให้อยู่ริมซ้าย */
+}
+ 
+ 
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 การ์ดต่อแถว */
+            gap: 15px; /* ระยะห่างระหว่างการ์ด */
+            justify-content: center;
+            width: 70%; /* กำหนดขนาดความกว้างของกริด */
+            margin: 0 auto; /* จัดให้กริดอยู่กึ่งกลางของหน้า */
+            padding-bottom: 40px;
+ 
+        }
+ 
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            width: 210px;
+            height: 290px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+ 
+        .info {
+            padding: 10px 0;
+        }
+ 
+        .title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+ 
+        .artist {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+ 
+        .views {
+            font-size: 12px;
+            color: #777;
+        }
+ 
+        .footer-container {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+ 
+    </style>
+</head>
+<body>
+ 
+    <div class="header"></div>
+    <h1>The
+        <P>Billboard</P>
+        <P>Month...</P> </h1>
+        <div class="grid-container">
+            <div class="card">
+                <img src="https://i.scdn.co/image/ab67616d0000b273c74b9ea7acadfc83eb14062b" alt="Proud">
+                <div class="info">
+                    <p class="title">Proud</p>
+                    <p class="artist">fellow fellow</p>
+                    <p class="views">58K views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://i.scdn.co/image/ab67616d00001e02f0ed77a87d25616b87b218a2" alt="Guncharie">
+                <div class="info">
+                    <p class="title">ถ้าเธอไม่ยิ้มมา</p>
+                    <p class="artist">guncharie</p>
+                    <p class="views">732K views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.genius.com/df619df0900a27ca4029fe0e3d55eab0.834x834x1.png" alt="Sorry">
+                <div class="info">
+                    <p class="title">SORRY</p>
+                    <p class="artist">Milli, Flower.far, Galchanie</p>
+                    <p class="views">6.2M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://www.dailynews.co.th/wp-content/uploads/2024/06/DAY-ONE-Cover-Art_0.jpg" alt="Day One">
+                <div class="info">
+                    <p class="title">DAY ONE</p>
+                    <p class="artist">PUN</p>
+                    <p class="views">29M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.boomplaymusic.com/group10/M00/07/19/e46d72d3a7d14682bc9068f867854da5_320_320.jpg" alt="ฉันไม่ต้องการเธอในตอนนี้">
+                <div class="info">
+                    <p class="title">ฉันไม่ต้องการเธอในตอนนี้</p>
+                    <p class="artist">Little John</p>
+                    <p class="views">18M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.genius.com/6cf139db1288cd84c0b31095845348aa.1000x1000x1.png" alt="เหมือนวิวาห์">
+                <div class="info">
+                    <p class="title">เหมือนวิวาห์</p>
+                    <p class="artist">Jeff Satur</p>
+                    <p class="views">28M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://i.scdn.co/image/ab67616d0000b27340595baf412657af206343ba" alt="ดอกไม้ที่รอฝน">
+                <div class="info">
+                    <p class="title">ดอกไม้ที่รอฝน</p>
+                    <p class="artist">The TOYS,NONT TANONT</p>
+                    <p class="views">32M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://www.dochord.com/wp-content/uploads/2024/09/PURPEECH-1-150x150.webp" alt="นี่ฉันเองคนที่...">
+                <div class="info">
+                    <p class="title">นี่ฉันเองคนที่...</p>
+                    <p class="artist">PURPEECH</p>
+                    <p class="views">295K views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://www.dochord.com/wp-content/uploads/2024/09/PUN-150x150.webp" alt="ที่เดิม">
+                <div class="info">
+                    <p class="title">ที่เดิม</p>
+                    <p class="artist">PUN</p>
+                    <p class="views">118K views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnbtfBSRHhohJJ2qCQV8Ikb041MAZ4mhRejw&s" alt="LIAR">
+                <div class="info">
+                    <p class="title">LIAR</p>
+                    <p class="artist">BUS</p>
+                    <p class="views">2.8M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://mpics.mgronline.com/pics/Images/567000002734201.JPEG" alt="สวยงามเสมอ">
+                <div class="info">
+                    <p class="title">สวยงามเสมอ</p>
+                    <p class="artist">Billkin</p>
+                    <p class="views">7.8M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f7/33/78/f7337849-0a23-91d1-9445-4bc58265996d/198704100314_Cover.jpg/1200x1200bb.jpg" alt="วันที่นาฬิกาของเราหมุนไปพร้อมกัน">
+                <div class="info">
+                    <p class="title">วันที่นาฬิกาของเราหมุนไปพร้อมกัน</p>
+                    <p class="artist">No One Else</p>
+                    <p class="views">7.9M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSalushH9uzkle650Ljkyn_BuFUqvWNLyZtWeKLLm3xCUicIeOFyBAH5ycqqpszLRMKrkc&usqp=CAU" alt="ส่วนต่าง">
+                <div class="info">
+                    <p class="title">ส่วนต่าง</p>
+                    <p class="artist">BOWKYLION</p>
+                    <p class="views">16M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7TH2a2hgqn0PHh4L4KH3eLpwr5VZ6R4NxYQ&s" alt="สาริกาลิ้นทอง">
+                <div class="info">
+                    <p class="title">สาริกาลิ้นทอง</p>
+                    <p class="artist">Paper Planes x โจอี้ ภูวศิษฐ์</p>
+                    <p class="views">9.5M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFA93FRQifS2pexxhh4llwTP-NjMw8PuljTEezOsGV7X7jrvoasKJt9SdrHgxpVLoprxw&usqp=CAU" alt="ที่ฉันเสียใจ">
+                <div class="info">
+                    <p class="title">ที่ฉันเสียใจ</p>
+                    <p class="artist">มนัสวีร์</p>
+                    <p class="views">15M views</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://melody-assets.line-scdn.net/musics/public/3ed71941-4df7-402d-a26a-94ea647f3808.jpeg" alt="ลืมไม่จริง">
+                <div class="info">
+                    <p class="title">ลืมไม่จริง</p>
+                    <p class="artist">Yes'Sir Days</p>
+                    <p class="views">2.M views</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-container"></div>    
+</body>
+</html>
