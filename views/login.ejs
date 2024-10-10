@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+        }
+    </style>
 </head>
 
 <body style="height: 100vh; margin: 0; padding: 0; background: linear-gradient(to bottom, #ff9fdf, #F0569A);">
@@ -17,7 +23,7 @@
     </div>
     <div class="flex justify-center items-center">
         <div class="col-sm-6 rounded py-3">      
-            <h1 class="text-6xl text-center text-light pt-18 font-bold">T-POP Hub</h1>
+            <h1 class="text-6xl text-center text-light pt-8 font-bold">T-POP Hub</h1>
             <form action="/login" method="POST" novalidate>
                 <div class="flex flex-col items-center pt-10">
                     <div class="form-group w-full max-w-md">
@@ -46,10 +52,10 @@
                         </div>
                     <% }); } %>
                 
-                    <a href="/login" class="btn bg-blue-500 mt-4 w-40 max-w-md text-center text-light rounded-xl">Login</a>
-                    <button type="submit" class="btn btn-secondary mt-2 w-40 max-w-md text-center text-light rounded-xl">Sign Up</button>
+                    <button type="submit" name="action" value="login" class="btn bg-blue-500 mt-4 w-40 max-w-md text-center text-light rounded-xl">Login</button>
+                    <button type="button" class="btn btn-secondary mt-2 w-40 max-w-md text-center text-light rounded-xl" 
+                            onclick="window.location.href='/register'">Sign Up</button>
                 </div>
-                
         </div>
     </div>
 </body>
