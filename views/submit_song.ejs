@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit New Song</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FAD2E0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 0px 0;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            /* จัดให้อยู่กลางแนวตั้ง */
+            justify-content: center;
+            /* จัดให้อยู่กลางแนวนอน */
+            height: 100px;
+            /* ตั้งค่าความสูงของ div ถ้าต้องการ */
+        }
+
+        .header img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+            /* เพิ่มระยะห่างระหว่างโลโก้และตัวหนังสือ */
+        }
+
+        .header span {
+            font-size: 20px;
+            /* ขนาดของตัวหนังสือ */
+            font-weight: bold;
+            /* หนักตัวหนังสือ */
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 500px;
+            margin: 20px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        h1 {
+            color: #E14A84;
+        }
+
+        h2 {
+            color: #E14A84;
+            font-size: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #E14A84;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            background-color: #E14A84;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #C2185B;
+        }
+
+        .footer-container {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="pic/iGOMaVIoPv0OnxuUdZA_2-transformed.png" alt="T-POP Hub">
+        <span>T-POP Hub</span>
+    </div>
+
+    <div class="form-container">
+        <h1>T-POP Hub</h1>
+        <h2>แจ้งเพลงใหม่เข้าชาร์ต / Tell us here for new songs</h2>
+        <form action="/submit_song" method="post">
+            <!-- Song Name -->
+            <label for="song_name">ชื่อเพลง (Song name)</label>
+            <p class="note">*โปรดตรวจสอบเพลงในชาร์ตก่อนที่จะส่งเพิ่มเพลง เพื่อป้องกันการซ้ำซ้อนของชื่อเพลง</p>
+            <p class="note">*Before filling the form, please recheck if the song has already been added into the weekly
+                chart or not</p>
+            <input type="text" id="song_name" name="song_name" required>
+
+            <!-- Artist Name -->
+            <label for="artist_name">ชื่อศิลปิน (Artist name)</label>
+            <input type="text" id="artist_name" name="artist_name" required>
+
+            <!-- YouTube URL -->
+            <label for="youtube_url">YouTube URL</label>
+            <p class="note">**ต้องเป็นลิงก์ที่มาจากช่อง Official**</p>
+            <p class="note">**The link URL must come from YouTube Official Channel**</p>
+            <input type="url" id="youtube_url" name="youtube_url" required>
+
+            <!-- Spotify URL -->
+            <label for="spotify_url">Spotify URL</label>
+            <input type="url" id="spotify_url" name="spotify_url">
+
+            <!-- Release Date -->
+            <label for="release_date">วันปล่อยเพลง (Release date)</label>
+            <p class="note">**จะต้องเป็นเพลงที่ปล่อยไม่เกิน 3 สัปดาห์ก่อนวันที่เริ่มชาร์ตถัดไป**</p>
+            <p class="note">**The song must be released not longer than 3 weeks before the new weekly chart has
+                started**</p>
+            <input type="date" id="release_date" name="release_date" required>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+            
+        </form>
+    </div>
+
+    <div class="footer-container">
+    </div>
+
+
+    
+</body>
+
+</html>
