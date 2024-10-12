@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงข้อมูลศิลปิน</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf3f8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ff7bba;
+            margin-top: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .image-upload-container,
+        .image-upload-artist {
+            position: relative;
+            width: 300px; /* กำหนดความกว้างของกรอบ */
+            height: 200px; /* กำหนดความสูงของกรอบ */
+            border: 1px solid #ccc;
+            border-radius: 4px; /* มุมมน */
+            overflow: hidden;/* ป้องกันไม่ให้รูปภาพล้นออกนอกกรอบ */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;/* เปลี่ยนเคอร์เซอร์เมื่อชี้ไปที่กรอบ */
+        }
+
+        .image-upload-container img,
+        .image-upload-artist img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ปรับรูปให้พอดีกับกรอบ */
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none; /* ซ่อนรูปภาพเริ่มต้น */
+        }
+
+        input[type="file"] {
+            display: none;
+            /* ซ่อน input file */
+        }
+
+        .ri-chat-upload-line {
+            color: #ccc;
+            font-size: 25px;
+        }
+
+        button {
+            background-color: #ff7bba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff4b9c;
+        }
+
+        button[type="button"] {
+            margin-top: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        /* เพิ่มสไตล์สำหรับ artist-section */
+        .artist-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .remove-artist {
+            margin-top: 15px; /* ช่องว่างด้านบนของปุ่มลบศิลปิน */
+            background-color: #ff7bba; /* สีพื้นหลัง */
+            color: white; /* สีตัวอักษร */
+            border: none; /* ไม่มีเส้นขอบ */
+            padding: 10px; /* ช่องว่างภายใน */
+            border-radius: 5px; /* มุมมน */
+            cursor: pointer; /* แสดงเคอร์เซอร์เมื่อชี้ไปที่ปุ่ม */
+            display: block; /* ทำให้ปุ่มลบแสดงเป็นบล็อก */
+            width: 15%; /* ทำให้ปุ่มลบเต็มความกว้าง */
+        }
+
+        .remove-artist:hover {
+            background-color: #ff4b9c; /* สีเมื่อชี้ไปที่ปุ่ม */
+        }
+
+        button[type="reset"]{
+            background-color: #b3b1b1;
+        }
+ 
+        button[type="reset"]:hover{
+            background-color: #777676;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>ลงข้อมูลศิลปิน</h2>
+    </header>
+
+    <main>
+        <form  action="#" method="post" enctype="multipart/form-data">
+
+            <!-- ข้อมูลวงศิลปิน -->
+            <section class="section">
+                <h2>ข้อมูลวงศิลปิน</h2>
+                <label for="band-name">ชื่อวงศิลปิน</label>
+                <input type="text" id="band-name" name="band-name" placeholder="กรอกชื่อวงศิลปิน">
+
+                <label for="band-picture">รูปวงศิลปิน</label>
+                <div class="image-upload-container" onclick="triggerFileInput(this)">
+                    <img class="preview-image" alt="Your uploaded image">
+                    <i class="ri-chat-upload-line"></i>
+                    <input type="file" class="file-input" accept="image/*">
+                </div>
+
+            </section>
+
+            <!-- ข้อมูลส่วนตัวของศิลปิน -->
+            <section class="section">
+                <h2>ข้อมูลส่วนตัวของศิลปิน</h2>
+
+                <label for="nickname-th">ชื่อ-นามสกุล (ไทย)</label>
+                <input type="text" id="nickname-th" name="nickname-th" placeholder="กรอกชื่อ-นามสกุล (ไทย)">
+
+                <label for="nickname-en">ชื่อ-นามสกุล (อังกฤษ)</label>
+                <input type="text" id="nickname-en" name="nickname-en" placeholder="กรอกชื่อ-นามสกุล (อังกฤษ)">
+
+                <label for="realname-th">ชื่อเล่น (ไทย)</label>
+                <input type="text" id="realname-th" name="realname-th" placeholder="กรอกชื่อเล่น (ไทย)">
+
+                <label for="realname-en">ชื่อเล่น (อังกฤษ)</label>
+                <input type="text" id="realname-en" name="realname-en" placeholder="กรอกชื่อเล่น (อังกฤษ)">
+
+                <label for="age">อายุ</label>
+                <input type="number" id="age" name="age" placeholder="กรอกอายุ" min="0" max="120">
+
+                <label for="province">จังหวัด</label>
+                <select id="province" name="province">
+                    <option value="" disabled selected>เลือกจังหวัด</option>
+                    <option value="Bangkok">กรุงเทพมหานคร</option>
+                    <option value="KBI">กระบี่</option>
+                    <option value="KRI">กาญจนบุรี</option>
+                    <option value="KSN">กาฬสินธุ์</option>
+                    <option value="KPT">กำแพงเพชร</option>
+                    <option value="KKN">ขอนแก่น</option>
+                    <option value="CTI">จันทบุรี</option>
+                    <option value="CCO">ฉะเชิงเทรา</option>
+                    <option value="CBI">ชลบุรี</option>
+                    <option value="CNT">ชัยนาท</option>
+                    <option value="CPM">ชัยภูมิ</option>
+                    <option value="CPN">ชุมพร</option>
+                    <option value="CRI">เชียงราย</option>
+                    <option value="CMI">เชียงใหม่</option>
+                    <option value="TRG">ตรัง</option>
+                    <option value="TRT">ตราด</option>
+                    <option value="TAK">ตาก</option>
+                    <option value="NYK">นครนายก</option>
+                    <option value="NPT">นครปฐม</option>
+                    <option value="NPM">นครพนม</option>
+                    <option value="NMA">นครราชสีมา</option>
+                    <option value="NST">นครศรีธรรมราช</option>
+                    <option value="NSN">นครสวรรค์</option>
+                    <option value="NBI">นนทบุรี</option>
+                    <option value="NWT">นราธิวาส</option>
+                    <option value="NAN">น่าน</option>
+                    <option value="BKN">บึงกาฬ</option>
+                    <option value="BRM">บุรีรัมย์</option>
+                    <option value="PTE">ปทุมธานี</option>
+                    <option value="PKN">ประจวบคีรีขันธ์</option>
+                    <option value="PRI">ปราจีนบุรี</option>
+                    <option value="PTN">ปัตตานี</option>
+                    <option value="PYO">พะเยา</option>
+                    <option value="AYA">พระนครศรีอยุธยา</option>
+                    <option value="PNA">พังงา</option>
+                    <option value="PLG">พัทลุง</option>
+                    <option value="PCT">พิจิตร</option>
+                    <option value="PLK">พิษณุโลก</option>
+                    <option value="PBI">เพชรบุรี</option>
+                    <option value="PNB">เพชรบูรณ์</option>
+                    <option value="PRE">แพร่</option>
+                    <option value="PKT">ภูเก็ต</option>
+                    <option value="MKM">มหาสารคาม</option>
+                    <option value="MDH">มุกดาหาร</option>
+                    <option value="MSN">แม่ฮ่องสอน</option>
+                    <option value="YST">ยโสธร</option>
+                    <option value="YLA">ยะลา</option>
+                    <option value="RET">ร้อยเอ็ด</option>
+                    <option value="RNG">ระนอง</option>
+                    <option value="RYG">ระยอง</option>
+                    <option value="RBR">ราชบุรี</option>
+                    <option value="LRI">ลพบุรี</option>
+                    <option value="LPG">ลำปาง</option>
+                    <option value="LPN">ลำพูน</option>
+                    <option value="LEI">เลย</option>
+                    <option value="SSK">ศรีสะเกษ</option>
+                    <option value="SNK">สกลนคร</option>
+                    <option value="SKA">สงขลา</option>
+                    <option value="STN">สตูล</option>
+                    <option value="SPK">สมุทรปราการ</option>
+                    <option value="SKM">สมุทรสงคราม</option>
+                    <option value="SKN">สมุทรสาคร</option>
+                    <option value="SKW">สระแก้ว</option>
+                    <option value="SRI">สระบุรี</option>
+                    <option value="SBR">สิงห์บุรี</option>
+                    <option value="STI">สุโขทัย</option>
+                    <option value="SPB">สุพรรณบุรี</option>
+                    <option value="SNI">สุราษฎร์ธานี</option>
+                    <option value="SRN">สุรินทร์</option>
+                    <option value="NKI">หนองคาย</option>
+                    <option value="NBP">หนองบัวลำภู</option>
+                    <option value="ATG">อ่างทอง</option>
+                    <option value="ACR">อำนาจเจริญ</option>
+                    <option value="UDN">อุดรธานี</option>
+                    <option value="UTT">อุตรดิตถ์</option>
+                    <option value="UTI">อุทัยธานี</option>
+                    <option value="UBN">อุบลราชธานี</option>
+                    <option value="other">อื่นๆ</option>
+                </select>
+
+                <label for="instagram">Instagram (IG)</label>
+                <input type="text" id="instagram" name="instagram" placeholder="กรอกลิงก์ Instagram ของศิลปิน">
+
+                <label for="artist-picture">รูปศิลปิน</label>
+                <div class="image-upload-artist" onclick="triggerFileInput(this)">
+                    <img class="preview-image" alt="Your uploaded image">
+                    <i class="ri-chat-upload-line"></i>
+                    <input type="file" class="file-input" accept="image/*">
+                </div>
+
+            </section>
+
+            <!-- ปุ่มเพิ่มศิลปิน ย้ายไปที่นี่ -->
+            <div class="add-artist-container">
+                <button type="button" id="add-artist">เพิ่มศิลปิน</button>
+            </div>
+
+            <!-- ช่องทางการติดต่อ -->
+            <section class="section">
+                <h2>ช่องทางการติดต่อ</h2>
+
+                <label for="instagram-contact">Instagram (IG)</label>
+                <input type="text" id="instagram-contact" name="instagram" placeholder="กรอกลิงก์ Instagram">
+
+                <label for="facebook">Facebook</label>
+                <input type="text" id="facebook" name="facebook" placeholder="กรอกลิงก์ Facebook">
+
+                <label for="twitter">X</label>
+                <input type="text" id="twitter" name="twitter" placeholder="กรอกลิงก์ X">
+
+                <label for="youtube">YouTube</label>
+                <input type="text" id="youtube" name="youtube" placeholder="กรอกลิงก์ YouTube">
+
+                <label for="spotify">Spotify</label>
+                <input type="text" id="spotify" name="spotify" placeholder="กรอกลิงก์ Spotify">
+            </section>
+
+            <div class="buttons">
+                <button type="reset">ยกเลิก</button>
+                <button type="submit">อัปโหลด</button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script>
+        // ฟังก์ชันในการเปิด File Input เมื่อคลิกที่ container
+        function triggerFileInput(container) {
+            const fileInput = container.querySelector('.file-input');
+            fileInput.click();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // ฟังก์ชันในการแสดงภาพที่อัปโหลด
+            function handleFileInputChange(event) {
+                const input = event.target;
+                const container = input.parentElement;
+                const previewImage = container.querySelector('.preview-image');
+                const icon = container.querySelector('.ri-chat-upload-line');
+
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                        if (icon) icon.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    if (icon) icon.style.display = 'block';
+                    previewImage.style.display = 'none';
+                }
+            }
+
+            // เพิ่ม event listener ให้กับทุก file-input ที่มีอยู่ใน DOM
+            function initializeFileInputs(scope) {
+                const fileInputs = scope.querySelectorAll('.file-input');
+                fileInputs.forEach(function (input) {
+                    input.removeEventListener('change', handleFileInputChange); // ป้องกันการเพิ่ม listener ซ้ำ
+                    input.addEventListener('change', handleFileInputChange);
+                });
+            }
+
+            // เรียกใช้ฟังก์ชันสำหรับส่วนหลัก
+            const form = document.querySelector('form');
+            initializeFileInputs(form);
+
+            // การจัดการการเพิ่มศิลปิน
+            const addArtistButton = document.getElementById("add-artist");
+
+            // การจัดการการเพิ่มศิลปิน
+            addArtistButton.addEventListener("click", function () {
+                // สร้างฟิลด์ใหม่สำหรับข้อมูลศิลปินเพิ่ม
+                const artistSection = document.createElement("div");
+                artistSection.classList.add("artist-section");
+
+                artistSection.innerHTML = `
+        <label>ชื่อ-นามสกุล (ไทย)</label>
+        <input type="text" name="nickname-th[]" placeholder="กรอกชื่อ-นามสกุล (ไทย)">
+    
+        <label>ชื่อ-นามสกุล (อังกฤษ)</label>
+        <input type="text" name="nickname-en[]" placeholder="กรอกชื่อ-นามสกุล (อังกฤษ)">
+    
+        <label>ชื่อเล่น (ไทย)</label>
+        <input type="text" name="realname-th[]" placeholder="กรอกชื่อเล่น (ไทย)">
+    
+        <label>ชื่อเล่น (อังกฤษ)</label>
+        <input type="text" name="realname-en[]" placeholder="กรอกชื่อเล่น (อังกฤษ)">
+    
+        <label>อายุ</label>
+        <input type="number" name="age[]" placeholder="กรอกอายุ" min="0" max="120">
+    
+        <label>จังหวัด</label>
+        <select name="province[]">
+            <option value="" disabled selected>เลือกจังหวัด</option>
+            <option value="Bangkok">กรุงเทพมหานคร</option>
+                    <option value="KBI">กระบี่</option>
+                    <option value="KRI">กาญจนบุรี</option>
+                    <option value="KSN">กาฬสินธุ์</option>
+                    <option value="KPT">กำแพงเพชร</option>
+                    <option value="KKN">ขอนแก่น</option>
+                    <option value="CTI">จันทบุรี</option>
+                    <option value="CCO">ฉะเชิงเทรา</option>
+                    <option value="CBI">ชลบุรี</option>
+                    <option value="CNT">ชัยนาท</option>
+                    <option value="CPM">ชัยภูมิ</option>
+                    <option value="CPN">ชุมพร</option>
+                    <option value="CRI">เชียงราย</option>
+                    <option value="CMI">เชียงใหม่</option>
+                    <option value="TRG">ตรัง</option>
+                    <option value="TRT">ตราด</option>
+                    <option value="TAK">ตาก</option>
+                    <option value="NYK">นครนายก</option>
+                    <option value="NPT">นครปฐม</option>
+                    <option value="NPM">นครพนม</option>
+                    <option value="NMA">นครราชสีมา</option>
+                    <option value="NST">นครศรีธรรมราช</option>
+                    <option value="NSN">นครสวรรค์</option>
+                    <option value="NBI">นนทบุรี</option>
+                    <option value="NWT">นราธิวาส</option>
+                    <option value="NAN">น่าน</option>
+                    <option value="BKN">บึงกาฬ</option>
+                    <option value="BRM">บุรีรัมย์</option>
+                    <option value="PTE">ปทุมธานี</option>
+                    <option value="PKN">ประจวบคีรีขันธ์</option>
+                    <option value="PRI">ปราจีนบุรี</option>
+                    <option value="PTN">ปัตตานี</option>
+                    <option value="PYO">พะเยา</option>
+                    <option value="AYA">พระนครศรีอยุธยา</option>
+                    <option value="PNA">พังงา</option>
+                    <option value="PLG">พัทลุง</option>
+                    <option value="PCT">พิจิตร</option>
+                    <option value="PLK">พิษณุโลก</option>
+                    <option value="PBI">เพชรบุรี</option>
+                    <option value="PNB">เพชรบูรณ์</option>
+                    <option value="PRE">แพร่</option>
+                    <option value="PKT">ภูเก็ต</option>
+                    <option value="MKM">มหาสารคาม</option>
+                    <option value="MDH">มุกดาหาร</option>
+                    <option value="MSN">แม่ฮ่องสอน</option>
+                    <option value="YST">ยโสธร</option>
+                    <option value="YLA">ยะลา</option>
+                    <option value="RET">ร้อยเอ็ด</option>
+                    <option value="RNG">ระนอง</option>
+                    <option value="RYG">ระยอง</option>
+                    <option value="RBR">ราชบุรี</option>
+                    <option value="LRI">ลพบุรี</option>
+                    <option value="LPG">ลำปาง</option>
+                    <option value="LPN">ลำพูน</option>
+                    <option value="LEI">เลย</option>
+                    <option value="SSK">ศรีสะเกษ</option>
+                    <option value="SNK">สกลนคร</option>
+                    <option value="SKA">สงขลา</option>
+                    <option value="STN">สตูล</option>
+                    <option value="SPK">สมุทรปราการ</option>
+                    <option value="SKM">สมุทรสงคราม</option>
+                    <option value="SKN">สมุทรสาคร</option>
+                    <option value="SKW">สระแก้ว</option>
+                    <option value="SRI">สระบุรี</option>
+                    <option value="SBR">สิงห์บุรี</option>
+                    <option value="STI">สุโขทัย</option>
+                    <option value="SPB">สุพรรณบุรี</option>
+                    <option value="SNI">สุราษฎร์ธานี</option>
+                    <option value="SRN">สุรินทร์</option>
+                    <option value="NKI">หนองคาย</option>
+                    <option value="NBP">หนองบัวลำภู</option>
+                    <option value="ATG">อ่างทอง</option>
+                    <option value="ACR">อำนาจเจริญ</option>
+                    <option value="UDN">อุดรธานี</option>
+                    <option value="UTT">อุตรดิตถ์</option>
+                    <option value="UTI">อุทัยธานี</option>
+                    <option value="UBN">อุบลราชธานี</option>
+                    <option value="other">อื่นๆ</option>
+        </select>
+        <label>รูปศิลปิน</label>
+        <div class="image-upload-artist" onclick="triggerFileInput(this)">
+            <img class="preview-image" alt="Your uploaded image">
+            <i class="ri-chat-upload-line"></i>
+            <input type="file" class="file-input" accept="image/*">
+        </div>
+    `;
+
+                // เพิ่ม artistSection ลงในตำแหน่งที่ต้องการ
+                const personalInfoSection = document.querySelector('.section:nth-of-type(2)');
+                personalInfoSection.appendChild(artistSection); // เพิ่ม artistSection ลงด้านล่างของข้อมูลส่วนตัว
+
+                // สร้างและเพิ่มปุ่มลบศิลปินลงไปที่ด้านล่างของ artistSection
+                const removeButton = document.createElement('button');
+                removeButton.type = 'button';
+                removeButton.classList.add('remove-artist');
+                removeButton.textContent = 'ลบศิลปิน';
+
+                // เพิ่มปุ่มลบลงด้านล่างของ artistSection
+                artistSection.appendChild(removeButton);
+
+                // เพิ่ม event listener ให้กับ file-input ใหม่
+                initializeFileInputs(artistSection);
+
+                // เพิ่ม event listener ให้กับปุ่มลบศิลปิน
+                removeButton.addEventListener('click', function () {
+                    artistSection.remove();
+                });
+            });
+
+        });
+    </script>
+</body>
+
+</html>
