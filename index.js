@@ -229,6 +229,10 @@ app.post('/submit_song', async (req, res) => {
 
 
 
+app.get('/information', (req, res) => {
+    res.render('information'); // render submit_song.ejs
+});
+
 app.get('/main', (req, res) => {
     res.render('main'); // render submit_song.ejs
 });
@@ -261,5 +265,6 @@ app.get('/search', (req, res) => {
 app.use('/', (req, res) => {
     res.status(404).send('<h1>404 Page Not Found!</h1>');
 });
+
 
 app.listen(3000, () => console.log("Server is Running..."));
