@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างโพสต์</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+ 
+.post-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: left;
+}
+ 
+.header {
+    display: flex;
+    justify-content: space-between; /* จัดเนื้อหาให้เว้นระยะเท่ากัน */
+    align-items: center;
+    width: 100%; /* ทำให้ครอบคลุมทั้งความกว้าง */
+    border-bottom: 1px solid #dfdfdf; /* เพิ่มเส้นขีดด้านล่าง */
+    padding-bottom: 15px; /* เพิ่มพื้นที่ด้านล่างให้กับ user-info */
+}
+ 
+ 
+.header h1 {
+    font-size: 20px;
+    margin: 0;
+    flex-grow: 1; /* ทำให้ h1 ขยายให้เต็มพื้นที่ */
+    text-align: center; /* จัดข้อความอยู่กลาง */
+}
+ 
+.close-btn {
+    background-color: #dfdfdf;
+    border-radius: 50%; /* ให้กรอบเป็นวงกลม */
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    width: 20px; /* กำหนดความกว้างของปุ่ม */
+    height: 40px; /* เปลี่ยนความสูงเป็น 30px */
+    display: flex; /* ใช้ flexbox */
+    align-items: center; /* จัดแนวกลางในแนวตั้ง */
+    justify-content: center; /* จัดแนวกลางในแนวนอน */
+    transition: background-color 0.3s; /* เพิ่มการเปลี่ยนสีพื้นหลัง */
+}
+ 
+.user-info {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+ 
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+ 
+.user-details {
+    display: flex;
+    flex-direction: column; /* จัดเรียงให้เป็นแนวตั้ง */
+}
+ 
+.username {
+    font-weight: bold;
+}
+ 
+.time {
+    font-size: 12px;
+    color: #999;
+}
+ 
+ 
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: none; /* ลบกรอบ */
+    resize: none; /* ไม่ให้สามารถปรับขนาดได้ */
+    background-color: #f9f9f9; /* สีพื้นหลัง (ถ้าต้องการ) */
+    outline: none; /* ไม่แสดงกรอบเมื่อโฟกัส */
+}
+ 
+ 
+ 
+input[type="file"] {
+    display: none;
+}
+ 
+label {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+ 
+ 
+button {
+    background-color: #FF56A1;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+ 
+button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+ 
+#preview-image {
+    margin-top: 20px;
+    text-align: center;
+}
+ 
+#preview-image img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+}
+ 
+.image-upload {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* กำหนดกรอบ */
+    border-radius: 4px; /* มุมโค้ง */
+    padding: 10px; /* เพิ่มพื้นที่ด้านใน */
+    background-color: #f9f9f9; /* สีพื้นหลัง */
+    justify-content: space-between;
+}
+ 
+.image-upload i {
+    cursor: pointer;
+    color: #EE6A9A;
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+ 
+<div class="post-container">
+    <div class="header">
+        <h1>สร้างโพสต์</h1>
+        <button class="close-btn" onclick="closePost()">✖</button>
+    </div>
+    <div class="user-info">
+        <img src="https://pakmud.com/wp-content/uploads/2022/11/cool-men-profile-53.jpg" alt="Profile" class="profile-pic">
+        <div class="user-details">
+            <span class="username">Dum Samit</span>
+            <span class="time">13 กำลังติดตาม</span>
+        </div>
+    </div>
+    <textarea id="post-text" placeholder="คุณต้องการเเชร์เรื่องราวอะไร, Dum Samit?" rows="4"></textarea>
+    <div class="image-upload">
+        <div class="text">เพิ่มไปยังโพสต์ของคุณ</div>
+        <i class="ri-image-fill"></i>
+    </div>
+    <div id="preview-image"></div>
+    <button id="post-button" disabled>โพสต์</button>
+</div>
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const fileUpload = document.createElement('input');
+    fileUpload.type = 'file';
+    fileUpload.id = 'image-upload';
+    fileUpload.accept = 'image/*';
+    fileUpload.style.display = 'none'; // ซ่อน input file
+ 
+    const postButton = document.getElementById('post-button');
+    const postText = document.getElementById('post-text');
+    const imageUploadDiv = document.querySelector('.image-upload');
+   
+    let imageElement = null; // ตัวแปรเก็บรูปภาพที่แสดง
+    let uploadContainer = null; // กรอบสำหรับแสดงรูปที่อัปโหลด
+ 
+    // เพิ่ม input file ลงใน image-upload div
+    imageUploadDiv.appendChild(fileUpload);
+ 
+    // ฟังก์ชันเปิดการอัปโหลดรูปภาพเมื่อคลิกที่ไอคอน
+    imageUploadDiv.querySelector('i').addEventListener('click', function() {
+        if (!uploadContainer) {
+            // สร้างกรอบสำหรับการอัปโหลด
+            uploadContainer = document.createElement('div');
+            uploadContainer.style.border = '1px solid #ccc'; // เส้นเต็ม
+            uploadContainer.style.padding = '10px'; // ระยะห่างในกรอบ
+            uploadContainer.style.borderRadius = '6px';
+            uploadContainer.style.marginBottom = '10px';
+            uploadContainer.style.width = '95%'; // ทำให้กรอบกว้างเต็มที่
+            uploadContainer.style.height = '200px'; // ความสูงคงที่
+            uploadContainer.style.display = 'flex';
+            uploadContainer.style.justifyContent = 'center';
+            uploadContainer.style.alignItems = 'center';
+            uploadContainer.style.position = 'relative';
+            uploadContainer.style.cursor = 'pointer'; // เปลี่ยน cursor เป็น pointer
+            uploadContainer.style.overflow = 'hidden'; // ซ่อนส่วนที่เกิน
+ 
+            // แทรกกรอบการอัปโหลดไปเหนือ image-upload div
+            imageUploadDiv.parentNode.insertBefore(uploadContainer, imageUploadDiv);
+ 
+            // เพิ่มไอคอนและข้อความบอกผู้ใช้ว่าให้คลิกเพื่ออัปโหลด
+            const uploadInstruction = document.createElement('div');
+            uploadInstruction.style.textAlign = 'center';
+            uploadInstruction.innerHTML = `
+                <i class="ri-image-add-fill" style="font-size: 24px; color: #FF56A1;"></i>
+                <p>เพิ่มรูปภาพ</p>
+            `;
+            uploadContainer.appendChild(uploadInstruction);
+ 
+            // เมื่อคลิกที่กรอบ ให้เปิด dialog สำหรับการอัปโหลดไฟล์
+            uploadContainer.addEventListener('click', function() {
+                fileUpload.click();
+            });
+        }
+    });
+ 
+    fileUpload.addEventListener('change', function() {
+        const file = this.files[0];
+ 
+        if (file) {
+            const reader = new FileReader();
+ 
+            reader.addEventListener('load', function() {
+                const imageUrl = this.result;
+ 
+                // หากมีรูปภาพอยู่แล้ว ให้ลบรูปภาพเดิมออกก่อน
+                if (imageElement) {
+                    imageElement.remove();
+                }
+ 
+                // สร้าง img element เพื่อแสดงภาพ
+                imageElement = document.createElement('img');
+                imageElement.src = imageUrl;
+                imageElement.style.width = '100%'; // ปรับความกว้างให้เต็มกรอบ
+                imageElement.style.height = '100%'; // ปรับความสูงให้เต็มกรอบ
+                imageElement.style.objectFit = 'cover'; // ครอบภาพให้อยู่ในขนาดที่กำหนด
+ 
+                // แสดงรูปในกรอบ
+                uploadContainer.appendChild(imageElement);
+ 
+                // ซ่อนไอคอนและข้อความ
+                uploadContainer.querySelector('i').style.display = 'none'; // ซ่อนไอคอน
+                uploadContainer.querySelector('p').style.display = 'none'; // ซ่อนข้อความ "เพิ่มรูปภาพ"
+            });
+ 
+            reader.readAsDataURL(file);
+        }
+    });
+ 
+    postText.addEventListener('input', function() {
+        if (this.value.length > 0 || imageElement) {
+            postButton.disabled = false;
+            postButton.style.backgroundColor = '#FF56A1'; // เปลี่ยนสีปุ่มเป็นสีชมพู
+        } else {
+            postButton.disabled = true;
+            postButton.style.backgroundColor = '#ccc'; // สีปุ่มเมื่อปิดใช้งาน
+        }
+    });
+ 
+    postButton.addEventListener('click', function() {
+        alert('โพสต์สำเร็จ!');
+        closePost(); // ปิดหน้าต่างโพสต์
+    });
+});
+ 
+// ฟังก์ชันปิดโพสต์
+function closePost() {
+    document.querySelector('.post-container').style.display = 'none';
+}  
+ 
+</script>
+</body>
+</html>
+ 
+ 
