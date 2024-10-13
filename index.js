@@ -7,6 +7,8 @@ const { body, validationResult } = require('express-validator');
 
 const app = express();
 app.use('/pic', express.static('pic'));
+app.use(express.static('public'));
+
 app.use(express.urlencoded({ extended: false }));
 
 // SET OUR VIEWS AND VIEW ENGINE
@@ -36,7 +38,6 @@ const ifLoggedin = (req, res, next) => {
     }
     next();
 };
-
 // END OF CUSTOM MIDDLEWARE
 
 // ROOT PAGE
@@ -62,9 +63,82 @@ app.get('/profile', ifNotLoggedin, (req, res) => {
             console.error(err);
             res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูล');
         });
-});
-;// END OF ROOT PAGE
+});// END OF ROOT PAGE
 
+app.get('/', async (req, res) => {
+    try {
+        const query = "SELECT * FROM artist_database";
+        const [rows] = await dbConnection.execute(query);
+        res.render('index', { artists: rows });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูลศิลปิน');
+    }
+});
+
+app.get('/bands', (req, res) => {
+    const query = "SELECT * FROM bands_database";
+
+    dbConnection.execute(query)
+        .then(([rows]) => {
+            res.render('bands', { bands: rows });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูลวงดนตรี');
+        });
+});
+
+// Route สำหรับแสดงรายละเอียดวงดนตรีพร้อมศิลปิน
+app.get('/band/:id', async (req, res) => {
+    const bandId = req.params.id;
+    try {
+        // ดึงข้อมูลวงดนตรีจาก bands_database
+        const bandQuery = "SELECT * FROM bands_database WHERE id_bands = ?";
+        const [bandRows] = await dbConnection.execute(bandQuery, [bandId]);
+
+        if (bandRows.length === 0) {
+            return res.status(404).send('วงดนตรีไม่พบ');
+        }
+
+        const band = bandRows[0];
+
+        // ดึงข้อมูลศิลปินจาก artist_database ที่เกี่ยวข้องกับ id_bands
+        const artistsQuery = "SELECT * FROM artist_database WHERE id_bands = ?";
+        const [artistRows] = await dbConnection.execute(artistsQuery, [bandId]);
+
+        // ตรวจสอบข้อมูลที่ดึงมา
+        console.log('Band:', band);
+        console.log('Artists:', artistRows);
+
+        // ส่งข้อมูลไปยัง view 'artist.ejs'
+        res.render('artist', { band: band, artists: artistRows });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูลวงดนตรีและศิลปิน');
+    }
+});
+
+// เส้นทางสำหรับค้นหาวงดนตรี
+app.get('/search', (req, res) => { 
+    const searchTerm = req.query.q; // รับคำค้นจาก query parameter 'q'
+
+    // สอบถามข้อมูลวงดนตรีจากตาราง bands_database โดยใช้ band_name LIKE
+    const query = "SELECT `id_bands`, `band_name`, `band_picture` FROM `bands_database` WHERE `band_name` LIKE ? LIMIT 25";
+    const likeSearchTerm = `%${searchTerm}%`;
+
+    dbConnection.execute(query, [likeSearchTerm])
+        .then(([rows]) => {
+            res.render('search', {
+                bands: rows,
+                searchTerm: searchTerm
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูล');
+        });
+});
 
 // HOME PAGE
 app.get('/main', ifNotLoggedin, (req, res) => {
@@ -239,45 +313,39 @@ app.post('/submit_song', async (req, res) => {
     }
 });
 
-
-
 app.get('/information', (req, res) => {
-    res.render('information'); // render submit_song.ejs
+    res.render('information'); // render information.ejs
 });
 
 app.get('/main', (req, res) => {
-    res.render('main'); // render submit_song.ejs
+    res.render('main'); // render main.ejs
 });
 
 app.get('/profile', (req, res) => {
-    res.render('profile'); // render submit_song.ejs
+    res.render('profile'); // render profile.ejs
 });
 
 app.get('/webboard', (req, res) => {
-    res.render('webboard'); // render submit_song.ejs
+    res.render('webboard'); // render webboard.ejs
 });
-
 
 app.get('/Tracking_channel', (req, res) => {
-    res.render('Tracking_channel'); // render submit_song.ejs
-});
-
-app.get('/artist', (req, res) => {
-    res.render('artist'); // render submit_song.ejs
+    res.render('Tracking_channel'); // render Tracking_channel.ejs
 });
 
 app.get('/song', (req, res) => {
-    res.render('song'); // render submit_song.ejs
+    res.render('song'); // render song.ejs
 });
 
 app.get('/search', (req, res) => {
-    res.render('search'); // render submit_song.ejs
+    res.render('search'); // render search.ejs
 });
 
 app.get('/Create_post', (req, res) => {
-    res.render('Create_post'); // render submit_song.ejs
+    res.render('Create_post'); // render Create_post.ejs
 });
 
+// 404 Page
 app.use('/', (req, res) => {
     res.status(404).send('<h1>404 Page Not Found!</h1>');
 });
