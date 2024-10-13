@@ -1,38 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist List</title>
+    <title>ค้นหาวงดนตรี</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Kanit', sans-serif;
             background-color: #ffffff;
         }
- 
-        /* Search bar section */
-        .search-bar {
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
-            padding: 20px 0 ;
+
+        .header {
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
+            padding: 12px;
             text-align: center;
         }
- 
-        .search-bar input {
-            width: 50%;
-            padding: 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 30px;
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
         }
- 
-        /* Filter button section */
+
+        .search-bar input[type="text"] {
+            width: 70%;
+            padding: 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: -40px; /* Adjust the position of the button */
+        }
+
+        .search-bar i {
+            font-size: 20px;
+            color: #888;
+        }
+
+        .profile-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 30px;
+        }
+
         .filter-buttons {
             text-align: center;
             margin-bottom: 20px;
-           
         }
- 
+
         .filter-buttons button {
             background-color: white;
             color: #ff6392;
@@ -43,15 +70,13 @@
             cursor: pointer;
             font-size: 14px;
             transition: background-color 0.3s ease;
-            margin-top:20px;
         }
- 
+
         .filter-buttons button:hover {
             background-color: #ff6392;
             color: white;
         }
- 
-        /* Artist list section */
+
         .artist-list {
             background-color: white;
             margin: 0 auto;
@@ -59,10 +84,9 @@
             padding: 20px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            margin-top:30px;
-           
+            margin-top: 30px;
         }
- 
+
         .artist-item {
             display: flex;
             justify-content: space-between;
@@ -70,31 +94,30 @@
             padding: 15px 0;
             border-bottom: 1px solid #eee;
         }
- 
+
         .artist-info {
             display: flex;
             align-items: center;
         }
- 
+
         .artist-info img {
             border-radius: 50%;
             width: 50px;
             height: 50px;
             margin-right: 20px;
         }
- 
+
         .artist-info h4 {
             margin: 0;
             font-size: 18px;
         }
- 
+
         .artist-info p {
             margin: 0;
             color: #888;
             font-size: 12px;
         }
- 
-        /* Button styles */
+
         .view-btn {
             background-color: white;
             border: 1px solid #ff6392;
@@ -105,132 +128,88 @@
             font-size: 14px;
             transition: background-color 0.3s ease;
         }
- 
+
         .view-btn:hover {
             background-color: #ff6392;
             color: white;
         }
- 
-        /* Footer section */
-        footer {
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
-            padding: 70px;
-            margin-top: 25px;
-            text-align: center;
+
+        .message {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
- 
-    <!-- Search Bar Section -->
-    <div class="search-bar">
-        <input type="text" placeholder="ค้นหาศิลปินที่คุณชื่นชอบ">
+
+    <!-- Header and Search Bar Section -->
+    <div class="header">      
+        <form class="search-bar" action="/search" method="GET">
+            <img src="pic/iGOMaVIoPv0OnxuUdZA_2-transformed.png" alt="T-POP Billboard" style="width: 80px;">
+            <input type="text" name="q" placeholder="ค้นหาศิลปินที่คุณชื่นชอบ" value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>" required>
+            <button><i class="fa fa-search"></i></button>
+            <div class="profile-icon">
+                <a href="/profile">
+                    <img src="https://i.pinimg.com/550x/13/d9/7d/13d97d540be78ef119a9e357b76816a1.jpg" alt="Profile Picture">
+                </a>
+            </div>
+        </form>
         <div class="filter-buttons">
-            <button>ทั้งหมด</button>
-            <button>ศิลปินกลุ่ม</button>
-            <button>ศิลปินเดี่ยว</button>
-            <button>ศิลปินดูโอ้</button>
+            <button type="button" onclick="filterByType('all')">ทั้งหมด</button>
+            <button type="button" onclick="filterByType('group')">ศิลปินกลุ่ม</button>
+            <button type="button" onclick="filterByType('solo')">ศิลปินเดี่ยว</button>
+            <button type="button" onclick="filterByType('duo')">ศิลปินดูโอ้</button>
         </div>
+        <% if (typeof message !== 'undefined') { %>
+            <p class="message"><%= message %></p>
+        <% } %>
     </div>
- 
-    <!-- Filter Buttons -->
-   
- 
+
     <!-- Artist List Section -->
-    <div class="artist-list">
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/cc/de/11/ccde11b7-b9e3-e33f-4aa4-8a0b84c7e33b/197338190500.jpg/1200x1200bf-60.jpg" alt="4EVE">
-                <div>
-                    <h4>4EVE</h4>
-                    <p>70,023 fans</p>
+    <div class="artist-list" id="artist-list">
+        <% if (bands.length > 0) { %>
+            <% bands.forEach(band => { %>
+                <div class="artist-item">
+                    <div class="artist-info">
+                        <img src="<%= band.band_picture %>" alt="<%= band.band_picture %>" onerror="this.onerror=null; this.src='/path/to/default-image.jpg';">
+                        <div>
+                            <h4><%= band.band_name %></h4>
+                            <p>70,023 fans</p>
+                        </div>
+                    </div>
+                    <button class="view-btn" onclick="window.location.href='/band/<%= band.id_bands %>'">เข้าชม</button>
                 </div>
-            </div>
-            <form action="/artist" method="GET">
-                <button class="view-btn">เข้าชม</button>
-            </form>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://img.ananweb.jp/2022/10/22101124/22-1.jpg" alt="Billkin">
-                <div>
-                    <h4>Billkin</h4>
-                    <p>69,012 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://image.joox.com/JOOXcover/0/92e366c5-d493-4ea7-9799-3939fc9aa600/1000" alt="PP KRIT">
-                <div>
-                    <h4>PP KRIT</h4>
-                    <p>50,467 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://images.genius.com/dadab5c0a8be5a5be55291961bf8f6c8.1000x1000x1.jpg" alt="NuNew">
-                <div>
-                    <h4>NuNew</h4>
-                    <p>37,370 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://i.scdn.co/image/ab6761610000e5eb013b76dbf70fc11888902360" alt="Three Man Down">
-                <div>
-                    <h4>Three Man Down</h4>
-                    <p>53,537 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://s359.kapook.com/pagebuilder/4517531f-0096-467b-8d70-16604e7e26c7.jpg" alt="BUS">
-                <div>
-                    <h4>BUS</h4>
-                    <p>33,220 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://i.pinimg.com/564x/da/2e/21/da2e2141e4ac683e98c8da80cc2e49dd.jpg" alt="NONT TANONT">
-                <div>
-                    <h4>NONT TANONT</h4>
-                    <p>51,456 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
- 
-        <div class="artist-item">
-            <div class="artist-info">
-                <img src="https://images.genius.com/4482a0b6bbe05aca7dc5f7595b04cfdc.1000x1000x1.jpg" alt="Milli">
-                <div>
-                    <h4>Milli</h4>
-                    <p>246,051 fans</p>
-                </div>
-            </div>
-            <button class="view-btn">เข้าชม</button>
-        </div>
+                
+            <% }); %>
+        <% } else if (typeof searchTerm !== 'undefined') { %>
+            <p>ไม่พบวงดนตรีที่ตรงกับคำค้นหา "<%= searchTerm %>"</p>
+        <% } %>
     </div>
- 
-    <!-- Footer -->
-    <footer></footer>
- 
+
+    <script>
+        function filterArtists() {
+            const input = document.querySelector('.search-bar input[type="text"]').value.toLowerCase();
+            const artistList = document.getElementById('artist-list');
+            const artistItems = artistList.getElementsByClassName('artist-item');
+
+            Array.from(artistItems).forEach(item => {
+                const artistName = item.getElementsByTagName('h4')[0].innerText.toLowerCase();
+                item.style.display = artistName.includes(input) ? '' : 'none'; // Show/hide based on input
+            });
+        }
+
+        function filterByType(type) {
+            const artistList = document.getElementById('artist-list');
+            const artistItems = artistList.getElementsByClassName('artist-item');
+
+            Array.from(artistItems).forEach(item => {
+                if (type === 'all' || item.getAttribute('data-type') === type) {
+                    item.style.display = ''; // Show all or matching type
+                } else {
+                    item.style.display = 'none'; // Hide non-matching type
+                }
+            });
+        }
+    </script>
 </body>
 </html>
