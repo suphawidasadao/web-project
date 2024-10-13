@@ -40,19 +40,31 @@ const ifLoggedin = (req, res, next) => {
 // END OF CUSTOM MIDDLEWARE
 
 // ROOT PAGE
-app.get('/', ifNotLoggedin, (req, res) => {
-    dbConnection.execute("SELECT `name` FROM `users` WHERE `id`=?", [req.session.userID])
+app.get('/profile', ifNotLoggedin, (req, res) => {
+    const userId = req.session.userID;
+
+    // สอบถามข้อมูลเพิ่มเติมจากตาราง users
+    const query = "SELECT `name`, `first_name`, `last_name` FROM `users` WHERE `id` = ?";
+    
+    dbConnection.execute(query, [userId])
         .then(([rows]) => {
-            res.render('main', {
-                name: rows[0].name
-            });
+            if (rows.length > 0) {
+                res.render('profile', {
+                    name: rows[0].name,
+                    first_name: rows[0].first_name,
+                    last_name: rows[0].last_name
+                });
+            } else {
+                res.render('profile', { name: 'Guest' });
+            }
         })
         .catch(err => {
-            // Handle the error properly
             console.error(err);
-            res.status(500).send('Server Error');
+            res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูล');
         });
-});// END OF ROOT PAGE
+});
+;// END OF ROOT PAGE
+
 
 // HOME PAGE
 app.get('/main', ifNotLoggedin, (req, res) => {
@@ -191,7 +203,7 @@ app.post('/login', ifLoggedin, [
 app.get('/logout', (req, res) => {
     // Session destroy
     req.session = null;
-    res.redirect('/');
+    res.redirect('/register');
 });
 // END OF LOGOUT
 
@@ -262,9 +274,12 @@ app.get('/search', (req, res) => {
     res.render('search'); // render submit_song.ejs
 });
 
+app.get('/Create_post', (req, res) => {
+    res.render('Create_post'); // render submit_song.ejs
+});
+
 app.use('/', (req, res) => {
     res.status(404).send('<h1>404 Page Not Found!</h1>');
 });
-
 
 app.listen(3000, () => console.log("Server is Running..."));
