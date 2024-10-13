@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-POP Billboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Prompt', sans-serif;
+            font-family: 'Kanit', sans-serif;
             background-color: white;
         }
 
         .header {
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
-            padding: 20px;
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
+            padding: 12px;
             text-align: center;
         }
 
@@ -29,11 +31,11 @@
         }
 
         .search-bar input[type="text"] {
-            width: 50%;
+            width: 70%;
             padding: 15px;
             border: none;
             border-radius: 20px;
-            font-size: 16px;
+            font-size: 14px;
 
         }
 
@@ -52,16 +54,24 @@
 
         .profile-icon img {
             width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 30px;
+            justify-items: center;
         }
 
         .mean {
-            margin-left: 250px;
-            margin-right: 250px;
+            max-width: 900px;
+            /* กำหนดความกว้างสูงสุด */
+            margin: 0 auto;
+            /* จัดให้อยู่ตรงกลางแนวนอน */
+            padding: 10px;
         }
 
         .mean1 {
-            margin-top: 40px;
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            margin-top: 30px;
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
             padding: 20px;
             color: #fff;
         }
@@ -69,28 +79,48 @@
         .main {
             display: flex;
             justify-content: space-between;
-           
         }
 
         .main i {
-    font-size: 35px; /* ขนาดไอคอน */
-    color: #fff; /* สีไอคอน */
-    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อวางเหนือไอคอน */
-    transition: color 0.3s; /* เพิ่มการเปลี่ยนสีแบบนุ่มนวล */
-}
+            font-size: 35px;
+            /* ขนาดไอคอน */
+            color: #fff;
+            /* สีไอคอน */
+            cursor: pointer;
+            /* เปลี่ยนเคอร์เซอร์เมื่อวางเหนือไอคอน */
+            transition: color 0.3s;
+            /* เพิ่มการเปลี่ยนสีแบบนุ่มนวล */
+        }
 
-.main i:hover {
-    color: #ff51c5; /* สีเมื่อวางเมาส์เหนือไอคอน */
-}
-
+        .main i:hover {
+            color: #ff4b9c;
+            /* สีเมื่อวางเมาส์เหนือไอคอน */
+        }
 
         .banner {
-            width: 100%;
+            width: 900px;
             max-height: 300px;
-            display: block;
-            object-fit: cover;
-            margin-top: 50px;
+            overflow: hidden;
+            /* ปิดการเลื่อน */
+            display: flex;
+            /* ใช้ Flexbox สำหรับจัดเรียงภาพ */
+            margin-top: 30px;
             border-radius: 10px;
+            position: relative;
+            white-space: nowrap;
+            /* ป้องกันการห่อข้อความ */
+            animation: slide 15s infinite;
+            /* เพิ่มแอนิเมชัน */
+        }
+
+        .banner img {
+            width: 900px;
+            /* ให้แต่ละภาพมีความกว้าง 900px */
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            display: inline-block;
+            /* ให้ภาพแสดงในแนวนอน */
         }
 
         .content {
@@ -100,18 +130,39 @@
         }
 
         .billboard-header {
-            font-size: 24px;
+            font-family: 'Georgia', serif;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 20px;
-            color: white;
-            display: flex;
-            margin-left: 15px;
+            -webkit-text-stroke: 1px rgb(30, 27, 27);
+            letter-spacing: 3px;
+            text-align: left;
+            /* จัดให้อยู่ริมซ้าย */
+            padding-left: 10px;
+            padding-top: 0;
+            color: #fba2ce;
+            text-shadow: 
+        2px 2px 2px #000,   /* /* เงาข้างบนและซ้าย */
+;   /* เงาข้างบนและขวา */
         }
+
+        .billboard-header h1,
+        .billboard-header p {
+            line-height: 0;
+            /* ปรับระยะห่างระหว่างบรรทัด */
+        }
+
 
         .songs {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
+            /* จัดเรียงกล่องเพลงจากซ้ายไปขวา */
+            flex-wrap: nowrap;
+            /* ป้องกันไม่ให้ห่อเป็นหลายแถว */
+            gap: 10px;
+            /* ลดระยะห่างระหว่างกล่องเพลง */
             padding: 20px;
+            overflow-x: auto;
+            /* เพิ่มการเลื่อนแนวนอนเมื่อจำเป็น */
         }
 
         .song-card {
@@ -120,8 +171,20 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             padding: 10px;
             text-align: left;
-            width: 180px;
+            width: 165px;
+            flex: 0 0 auto;
+            /* ป้องกันไม่ให้ขยายหรือย่อ */
+            transition: transform 0.3s;
+            /* เพิ่มเอฟเฟกต์เมื่อเลื่อนเมาส์ */
+            margin: 0;
+            /* ลบระยะห่างเพิ่มเติม */
         }
+
+        .song-card:hover {
+            transform: translateY(-10px);
+            /* ยกกล่องเพลงขึ้นเมื่อเลื่อนเมาส์ */
+        }
+
 
         .song-card img {
             width: 100%;
@@ -138,85 +201,77 @@
             margin: 0;
             color: #888;
             font-size: 14px;
+
         }
 
         .add-song-section {
             margin: 40px;
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
             padding: 20px;
             border-radius: 15px;
             color: #fff;
             max-height: 120px;
-            max-width: 900px; /* กำหนดความกว้างสูงสุด */
-            margin-left: auto; /* จัดให้อยู่กลาง */
-            margin-right: auto; /* จัดให้อยู่กลาง */
+            max-width: 900px;
+            /* กำหนดความกว้างสูงสุด */
+            margin-left: auto;
+            /* จัดให้อยู่กลาง */
+            margin-right: auto;
+            /* จัดให้อยู่กลาง */
         }
 
         .add-song-section h2 {
             margin-top: 10px;
+            letter-spacing: 2px;
             text-align: center;
-            color: #ff51c5;
+            color: #fc75b6;
             /* สีตัวหนังสือ */
             text-shadow:
-                1px 1px 0 #ea2157,
-                -1px -1px 0 #ea2157,
-                1px -1px 0 #ea2157,
-                -1px 1px 0 #ea2157;
+                1px 1px 0 #ff0066,
+                -1px -1px 0 #ff0066,
+                1px -1px 0 #ff0066,
+                -1px 1px 0 #ff0066;
             /* สีขอบ */
         }
 
         .add-song-section p {
-            color: #843F0E;
-
+            color: #381e0b;
+            font-size: 18px;
             margin-top: 10px;
         }
 
         .add-song-section button {
-            background-color: #63243b;
+            background-color: #ff4b9c;
             border: none;
-            padding: 10px 20px;
+            padding: 14px 30px;
+            /* เพิ่มขนาด padding */
+            font-size: 16px;
+            font-weight: bold;
+            /* เพิ่มขนาดตัวอักษร */
             color: #fff;
             border-radius: 25px;
+            /* ปรับให้กลม */
+            cursor: pointer;
+            /* แสดงเคอร์เซอร์เมื่อชี้ */
+            transition: background-color 0.3s;
+            /* เอฟเฟกต์การเปลี่ยนสี */
         }
 
-        .move-up {
-            position: relative;
-            top: -50px;
-            right: -800px;
-            background-color: #f03479;
-            border: none;
-            padding: 15px 15px;
-            color: #fff;
-            border-radius: 25px;
+        .add-song-section button:hover {
+            background-color: #f51380;
+            /* เปลี่ยนสีเมื่อเมาส์อยู่บนปุ่ม */
         }
 
-        .add-song-section button {
-    background-color: #63243b;
-    border: none;
-    padding: 8px 15px; /* ลดขนาด padding */
-    color: #fff;
-    border-radius: 20px; /* ปรับให้กลม */
-    cursor: pointer; /* แสดงเคอร์เซอร์เมื่อชี้ */
-    transition: background-color 0.3s; /* เอฟเฟกต์การเปลี่ยนสี */
-}
-
-.add-song-section button:hover {
-    background-color: #7a2f4c; /* เปลี่ยนสีเมื่อเมาส์อยู่บนปุ่ม */
-}
 
         footer {
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
             padding: 70px;
-            margin-top: 100px;
         }
 
-        .profile-icon img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-left: 30px;
-            justify-items: center;
+        
+
+        .add-song {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -231,7 +286,7 @@
             </form>
             <div class="profile-icon">
                 <a href="/profile">
-                    <img src="https://p16-va.lemon8cdn.com/tos-alisg-v-a3e477-sg/ocBEsda1EKf9QnWC2bRDfBPtdUEFAA3gAGdmID~tplv-tej9nj120t-origin.webp"
+                    <img src="https://i.pinimg.com/550x/13/d9/7d/13d97d540be78ef119a9e357b76816a1.jpg"
                         alt="Profile Picture">
                 </a>
             </div>
@@ -239,13 +294,23 @@
     </div>
 
     <div class="mean">
-        <img class="banner"
-            src="https://storage.googleapis.com/atime-media-prod/content/7cd2a345-f428-4a8b-8bd1-bb31f3931c6b.jpeg"
-            alt="Artist Banner">
+        <div class="banner">
+            <img src="https://s359.kapook.com/pagebuilder/eb7097ed-7973-44a8-88e9-0b26fb08802c.jpg"
+                alt="Banner Image 1">
+            <img src="https://images.workpointtoday.com/workpointnews/2023/04/13163901/1681378737_92970_340375051_283855781049191_30891848489085041_n.jpg"
+                alt="Banner Image 2">
+            <img src="https://images.workpointtoday.com/workpointnews/2022/07/13121045/1657689042_58552_web2.jpg"
+                alt="Banner Image 3">
+        </div>
         <div class="content">
             <div class="mean1">
                 <div class="main">
-                    <div class="billboard-header">The<br> Billboard <br>Month....</div>
+                    <div class="billboard-header">
+                        <p>The
+                        <h2>Billboard</h2>
+                        <P>Month...</P>
+                        </p>
+                    </div>
                     <a href="/song">
                         <i class="fa-regular fa-circle-right" aria-hidden="true"></i>
                     </a>
@@ -284,16 +349,37 @@
         </div>
         <div class="add-song-section">
             <h2>แจ้งเพลงใหม่เข้าชาร์ตได้ที่นี่</h2>
-            <p>เพลงของศิลปินที่คุณชื่นชอบมาแล้วใช่มั้ย?<br>แจ้งเพลงใหม่เข้าชาร์ตตอนนี้เลย</p>
-            <form action="/submit_song" method="GET">
-                <button class="move-up" type="submit">เพิ่มเพลง</button>
-            </form>
-            
+            <div class="add-song">
+                <p>เพลงของศิลปินที่คุณชื่นชอบมาแล้วใช่มั้ย?<br>แจ้งเพลงใหม่เข้าชาร์ตตอนนี้เลย</p>
+                <form action="/submit_song" method="GET">
+                    <button class="move-up" type="submit">เพิ่มเพลง</button>
+                </form>
+            </div>
         </div>
     </div>
     <footer>
         <div class="footer1"></div>
     </footer>
+
+    <script>
+        const images = document.querySelectorAll('.banner img');
+        let index = 0;
+
+        function showNextImage() {
+            images[index].style.display = 'none'; // ซ่อนภาพปัจจุบัน
+            index = (index + 1) % images.length; // เปลี่ยนดัชนีภาพถัดไป
+            images[index].style.display = 'block'; // แสดงภาพถัดไป
+        }
+
+        // เริ่มแสดงภาพแรก
+        images.forEach((img, idx) => {
+            img.style.display = idx === 0 ? 'block' : 'none'; // แสดงภาพแรก
+        });
+
+        setInterval(showNextImage, 3000); // เปลี่ยนทุก ๆ 3 วินาที
+    </script>
+
+
 </body>
 
 </html>
