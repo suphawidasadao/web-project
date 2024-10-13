@@ -207,7 +207,7 @@ footer {
                 </button>
             </div>
             <div class="profile-text">
-                <h2>Dum Samit</h2>
+                <h2><%= name %></h2>
                 <i class="ri-user-add-line">   13 กำลังติดตาม</i>
             </div>
         </div>
@@ -216,12 +216,12 @@ footer {
             <form id="userForm">
                 <div class="input-group">
                     <label for="username">ชื่อผู้ใช้</label>
-                    <input type="text" id="username" value="Dum Samit">
+                    <input type="text" id="username" value="<%= name %>">
                 </div>
  
                 <div class="input-group">
                     <label for="lastname">ชื่อ-นามสกุล</label>
-                    <input type="text" id="lastname" value="ดำ สมิด">
+                    <input type="text" id="lastname" value="<%= first_name %> <%= last_name %>">
                 </div>
  
                 <div class="input-group">
