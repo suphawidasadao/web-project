@@ -22,19 +22,15 @@
             color: white;
             text-align: center;
             display: flex;
-            align-items: center;
-            /* จัดให้อยู่กลางแนวตั้ง */
-            justify-content: center;
-            /* จัดให้อยู่กลางแนวนอน */
-            height: 100px;
-            /* ตั้งค่าความสูงของ div ถ้าต้องการ */
+            align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
+            justify-content: center; /* จัดให้อยู่กลางแนวนอน */
+            height: 100px;/* ตั้งค่าความสูงของ div ถ้าต้องการ */
         }
 
         .header img {
             width: 100px;
             height: auto;
-            margin-right: 10px;
-            /* เพิ่มระยะห่างระหว่างโลโก้และตัวหนังสือ */
+            margin-right: 10px;/* เพิ่มระยะห่างระหว่างโลโก้และตัวหนังสือ */
         }
 
         .header span {
@@ -48,7 +44,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 10px;
-            width: 500px;
+            width: 900px;
             margin: 20px auto;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             flex-grow: 1;
@@ -117,6 +113,7 @@
 
     <div class="form-container">
         <h1>T-POP Hub</h1>
+
         <h2>แจ้งเพลงใหม่เข้าชาร์ต / Tell us here for new songs</h2>
         <form action="/submit_song" method="post">
             <!-- Song Name -->
