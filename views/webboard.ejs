@@ -6,107 +6,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4EVE Fan Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
 </head>
 <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
 
-.header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
-            padding: 40px 50px;
-            color: white;
-        }
+    .header {
+        background: linear-gradient(to bottom, #fba2ce, #ff72a6);
+        text-align: center;
+        padding: 63px 0;
+        color: white;
+        width: 100%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
 
-        .header1 {
+    .band-profile {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* เปลี่ยนเป็น column เพื่อจัดวาง nav-bar ด้านล่าง */
             align-items: center;
-            justify-content: center;
-            padding: 50px;
-            background-color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 30px; /* ลด padding เพื่อให้ดูดีขึ้น */
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-        }
-
-        .logo {
-            flex-shrink: 0;
-            margin-right: 20px;
-            margin-left: -550px;
+            width: 100%;
         }
 
 
-        .logo img {
+        .vv {
+            display: flex;
+            align-items: center; 
+            padding-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+        }
+
+        .vv img {
             width: 156px;
             height: 155px;
             border-radius: 15px;
-
+            margin-right: 50px; 
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .info {
-            text-align: center;
-            margin-left: -300px;
-            margin-top: -150px;
+        .mm {
+            text-align: left; 
+            padding-right: 500px;
         }
 
-        .info h1 {
-            font-size: 32px;
-            margin: 0;
-            color: black;
+        .mm h1 {
+            margin: 0; 
+            font-size: 24px; 
+            color: #333; 
         }
 
-        .info p {
-            font-size: 16px;
-            color: #929090;
+        .mm span {
+            font-size: 18px; 
+            color: #666; 
         }
 
         .join-btn {
-            background-color: white;
-            color: #F0569A;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            border: 2px solid #F0569A;
-            margin-top: 12px;
-            position: relative;
-            top: -80px;
-            left: 300px;
-        }
-
-
-
-        .join-btn:hover {
             background-color: #F0569A;
             color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px; /* เพิ่มระยะห่างด้านบน */
+        }
+
+        .join-btn:hover {
+            background-color: #ff6392;
+            transform: translateY(-2px); 
         }
 
         .nav-bar {
             display: flex;
             justify-content: center;
-            gap: 70px;
+            gap: 30px; 
             list-style: none;
             padding: 0;
-            margin-left: -120px;
-            margin-top: 70px;
+            margin-top: 20px; /* ระยะห่างระหว่าง nav-bar และปุ่ม */
         }
 
         .nav-bar a {
             text-decoration: none;
             color: #F0569A;
             font-size: 18px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: 2px solid #F0569A;
             border-radius: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
         .nav-bar a:hover {
             background-color: #F0569A;
             color: white;
+            transform: translateY(-2px); 
         }
+
     /* Modal Styles */
     .modal {
         position: fixed;
@@ -151,35 +152,67 @@
         /* Ensure image fits within modal width */
         height: auto;
         /* Maintain aspect ratio */
-        
+
     }
+
     .post-card {
-    cursor: pointer;
+        cursor: pointer;
+    }
+
+    .create-post-btn {
+        background-color: #ccc;
+        /* สีเทา */
+        color: white;
+        width: 60px;
+        /* กำหนดความกว้าง */
+        height: 60px;
+        /* กำหนดความสูง */
+        border: none;
+        border-radius: 50%;
+        /* ปรับให้เป็นวงกลม */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 10%;
+        right: 70px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .create-post-btn i {
+        font-size: 24px;
+        /* ขนาดของไอคอน */
+    }
+
+    .create-post-btn:hover {
+        background-color: #F0569A;
+        /* เปลี่ยนเป็นสีชมพูเมื่อเมาส์ชี้ */
     }
 </style>
 
 <body class="bg-gray-100">
 
     <!-- Header Section -->
-    <header>
-        <div class="header"></div>
-        <div class="header1">
-            <div class="logo">
-                <img src="https://storage.googleapis.com/atime-media-prod/editor/content/d56c4558-c78a-4891-9456-e536e3538a71.jpeg"
-                    alt="4EVE Image">
-            </div>
-            <div class="info">
-                <h1>4EVE</h1>
-                <p>70,929 fans</p>
-            </div>
-            <button class="join-btn">✩ เข้าร่วม</button>
+    <header class="header">
+    </header>
+            <div class="band-profile">
+                <div class="vv">
+                    <img src="https://storage.googleapis.com/atime-media-prod/editor/content/d56c4558-c78a-4891-9456-e536e3538a71.jpeg"
+                        alt="4EVE Image">
+                    <div class="mm">
+                        <h1>4EVE</h1>
+                        <span>70,929 fans</span>
+                    </div>
+                    <button class="join-btn">✩ เข้าร่วม</button>
+                </div>
+            
             <ul class="nav-bar">
-                <li><a href="#">ประวัติ</a></li>
-                <li><a href="#">ติดตามผลงานศิลปิน</a></li>
-                <li><a href="#">เว็บบอร์ด</a></li>
+                <li><a href="http://localhost:3000/band/2">ประวัติ</a></li>
+                <li><a href="http://localhost:3000/Tracking_channel/2">ติดตามผลงานศิลปิน</a></li>
+                <li><a href="http://localhost:3000/webboard">เว็บบอร์ด</a></li>
             </ul>
         </div>
-    </header>
 
     <!-- Fan Feed Section -->
     <div class="max-w-4xl mx-auto mt-10 w-[800px] rounded-lg mb-2">
@@ -258,8 +291,8 @@
                 </div>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-lg post-card">
-                <img src="src/iGOMaVIoPv0OnxuUdZA_2-transformed.jpg" alt="Fan Post"
-                    class="w-full rounded-lg mb-2 post-image">
+                <img src="https://files.dara2you.com/2023/02/%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%94%E0%B9%8C-3-819x1024.jpg"
+                    alt="Fan Post" class="w-full rounded-lg mb-2 post-image">
                 <div class="flex items-center justify-between text-pink-500">
                     <div class="flex items-center space-x-1 favorite-btn">
                         <span class="material-icons">favorite</span>
@@ -271,6 +304,9 @@
                     </div>
                 </div>
             </div>
+            <button class="create-post-btn">
+                <i class="ri-add-line"></i>
+            </button>
         </div>
     </div>
 
@@ -288,8 +324,8 @@
             <p id="modal-text" class="my-4">Details here</p>
             <div class="mb-4">
                 <div class="flex items-start mb-3">
-                    <img src="https://via.placeholder.com/40" alt="Commenter Profile"
-                        class="rounded-full w-10 h-10 mr-3">
+                    <img src="https://i.pinimg.com/736x/65/a0/4d/65a04d99023eea824596f673a677743a.jpg"
+                        alt="Commenter Profile" class="rounded-full w-10 h-10 mr-3">
                     <div>
                         <span class="font-bold text-sm">Commenter 1</span>
                         <p class="text-sm text-gray-600 mt-1">This is a comment on the post. It provides feedback or
@@ -297,8 +333,8 @@
                     </div>
                 </div>
                 <div class="flex items-start mb-3">
-                    <img src="https://via.placeholder.com/40" alt="Commenter Profile"
-                        class="rounded-full w-12 h-10 mr-3">
+                    <img src="https://www.meme-arsenal.com/memes/ef8aab19f833034b8787877b50d4655a.jpg"
+                        alt="Commenter Profile" class="rounded-full w-10 h-10 mr-3">
                     <div>
                         <span class="font-bold text-sm">Commenter 2</span>
                         <p class="text-sm text-gray-600 mt-1">Another comment on the post. Additional thoughts or
@@ -350,6 +386,15 @@
                 modal.style.display = 'none';
             }
         });
+
+        const createPostBtn = document.querySelectorAll('.create-post-btn');
+
+        createPostBtn.forEach(btn => {
+            btn.addEventListener('click', function () {
+                window.location.href = "http://localhost:3000/Create_post"; // เปลี่ยนหน้าเมื่อคลิก
+            });
+        });
+
     </script>
 
 

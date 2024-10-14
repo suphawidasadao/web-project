@@ -140,18 +140,14 @@
             padding-left: 10px;
             padding-top: 0;
             color: #fba2ce;
-            text-shadow: 
-        2px 2px 2px #000,   /* /* เงาข้างบนและซ้าย */
-;   /* เงาข้างบนและขวา */
+            text-shadow: 2px 2px 2px #000,;   
         }
 
         .billboard-header h1,
         .billboard-header p {
             line-height: 0;
-            /* ปรับระยะห่างระหว่างบรรทัด */
         }
-
-
+        
         .songs {
             display: flex;
             justify-content: flex-start;
@@ -278,28 +274,25 @@
 
 <body>
     <div class="header">
-        <div class="search-bar">
+        <form class="search-bar" action="/search" method="GET">
             <img src="pic/iGOMaVIoPv0OnxuUdZA_2-transformed.png" alt="T-POP Billboard" style="width: 80px;">
-            <input type="text" placeholder="ค้นหาศิลปินที่คุณชื่นชอบ...">
-            <form action="/search" method="GET">
-                <button><i class="fa fa-search"></i></button>
-            </form>
+            <input type="text" name="q" placeholder="ค้นหาศิลปินที่คุณชื่นชอบ" value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>" required>
+            <button><i class="fa fa-search"></i></button>
             <div class="profile-icon">
                 <a href="/profile">
-                    <img src="https://i.pinimg.com/550x/13/d9/7d/13d97d540be78ef119a9e357b76816a1.jpg"
-                        alt="Profile Picture">
+                    <img src="https://i.pinimg.com/550x/13/d9/7d/13d97d540be78ef119a9e357b76816a1.jpg" alt="Profile Picture">
                 </a>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="mean">
         <div class="banner">
             <img src="https://s359.kapook.com/pagebuilder/eb7097ed-7973-44a8-88e9-0b26fb08802c.jpg"
                 alt="Banner Image 1">
-            <img src="https://images.workpointtoday.com/workpointnews/2023/04/13163901/1681378737_92970_340375051_283855781049191_30891848489085041_n.jpg"
+            <img src="https://cms.kapook.com/uploads/tag/44/ID_43312_642fd7698ab75.jpg"
                 alt="Banner Image 2">
-            <img src="https://images.workpointtoday.com/workpointnews/2022/07/13121045/1657689042_58552_web2.jpg"
+            <img src="https://s359.kapook.com/pagebuilder/b21f3c28-ef5d-462d-a057-24cd464c128e.jpg"
                 alt="Banner Image 3">
         </div>
         <div class="content">
