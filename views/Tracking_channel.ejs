@@ -4,113 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4EVE Social Media</title>
+    <title><%= band.band_name %> Social Media</title>
     <style>
+        /* CSS ของคุณ */
         body {
             font-family: Arial, sans-serif;
-            background-color: #fce2e5;
+            background-color: #fff;
             margin: 0;
             padding: 0;
             text-align: center;
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, #ff9fdf, #F0569A);
-            padding: 40px 50px;
+            background: linear-gradient(to bottom, #fba2ce, #ff72a6);
+            text-align: center;
+            padding: 63px 0;
             color: white;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .header1 {
+        .band-profile {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+        flex-direction: column;
+        background-color: white;
+        padding: 30px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
             justify-content: center;
-            padding: 50px;
-            background-color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-        }
 
-        .logo {
-            flex-shrink: 0;
-            margin-right: 20px;
-            margin-left: -550px;
         }
 
 
-        .logo img {
+        .vv {
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            padding-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+            gap: 500px;
+            
+            
+
+        }
+
+        .vv img {
             width: 156px;
             height: 155px;
             border-radius: 15px;
-
+           margin-left: 0px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .info {
-            text-align: center;
-            margin-left: -300px;
-            margin-top: -150px;
+        .mm {
+            text-align: left; 
+            padding-right: 0px;
         }
 
-        .info h1 {
-            font-size: 32px;
-            margin: 0;
-            color: black;
+        .mm h1 {
+            margin: 0; 
+            font-size: 24px; 
+            color: #333; 
         }
 
-        .info p {
-            font-size: 16px;
-            color: #929090;
+        .mm span {
+            font-size: 18px; 
+            color: #666; 
         }
 
         .join-btn {
-            background-color: white;
-            color: #F0569A;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            border: 2px solid #F0569A;
-            margin-top: 12px;
-            position: relative;
-            top: -80px;
-            left: 300px;
-        }
-
-
-
-        .join-btn:hover {
             background-color: #F0569A;
             color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px; /* เพิ่มระยะห่างด้านบน */
+            display: flex;
+            
+            
+        }
+
+        .foureve{
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            padding-left: 0px;
+        }
+
+        .join-btn:hover {
+            background-color: #ff6392;
+            transform: translateY(-2px); 
         }
 
         .nav-bar {
             display: flex;
             justify-content: center;
-            gap: 70px;
+            gap: 30px; 
             list-style: none;
             padding: 0;
-            margin-left: -120px;
-            margin-top: 70px;
+            margin-top: 20px; /* ระยะห่างระหว่าง nav-bar และปุ่ม */
         }
 
         .nav-bar a {
             text-decoration: none;
             color: #F0569A;
             font-size: 18px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: 2px solid #F0569A;
             border-radius: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
         .nav-bar a:hover {
             background-color: #F0569A;
             color: white;
+            transform: translateY(-2px); 
         }
 
         .social-links-container {
@@ -127,7 +138,7 @@
         }
 
         .social-links li {
-            margin: 10px 0;
+            margin: 20px 0;
             position: relative;
             border-bottom: 1px solid #a1a1a1;
             padding-bottom: 10px;
@@ -144,6 +155,7 @@
             display: flex;
             align-items: center;
             transition: color 0.3s;
+            padding: 10px;
         }
 
         .social-links a:hover {
@@ -166,68 +178,76 @@
 </head>
 
 <body>
-    <header>
-        <div class="header"></div>
-        <div class="header1">
-            <div class="logo">
-                <img src="https://storage.googleapis.com/atime-media-prod/editor/content/d56c4558-c78a-4891-9456-e536e3538a71.jpeg"
-                    alt="4EVE Image">
-            </div>
-            <div class="info">
-                <h1>4EVE</h1>
-                <p>70,929 fans</p>
-            </div>
-            <button class="join-btn">✩ เข้าร่วม</button>
-            <ul class="nav-bar">
-                <li><a href="http://localhost:3000/artist?">ประวัติ</a></li>
-                <li><a href="http://localhost:3000/Tracking_channel">ติดตามผลงานศิลปิน</a></li>
-                <li><a href="http://localhost:3000/webboard">เว็บบอร์ด</a></li>
-            </ul>
-        </div>
+    <header class="header">
     </header>
+    <div class="band-profile">
+        <div class="vv">
+            <div class="foureve">
+            <img src="<%= band.band_picture %>" alt="<%= band.band_name %>">
+            <div class="mm">
+                <h1><%= band.band_name %></h1>
+                <span>70,929 fans</span>
+            </div>
+            </div>
+            <div>
+            <button class="join-btn">✩ เข้าร่วม</button>
+            </div>
+        </div>
+
+        <ul class="nav-bar">
+            <li><a href="http://localhost:3000/band/2">ประวัติ</a></li>
+            <li><a href="http://localhost:3000/Tracking_channel/2">ติดตามผลงานศิลปิน</a></li>
+            <li><a href="http://localhost:3000/webboard">เว็บบอร์ด</a></li>
+        </ul>
+    </div>
     <main>
         <div class="social-links-container">
             <ul class="social-links">
-                <li>
-                    <a href="https://www.instagram.com/4eve_official/" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-                            alt="Instagram" width="30">
-                        Instagram
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/4EVEofficial" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                            alt="Facebook" width="30">
-                        Facebook
-                    </a>
-                </li>
-                <li>
-                    <a href="https://x.com/4eveofficial" target="_blank">
-                        <img src="https://today-obs.line-scdn.net/0hTTCV_1y4C3t-LxmiIal0LEZ5BwpNSRFyXBwXHVstAktSAx8uQ05YGFspU1daGxl6XklCHA8vXUtSFxwqQQ/w644"
-                            alt="X" width="30">
-                        X
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/channel/UC9mrlKAyV8AushabYK8i2ew" target="_blank">
-                        <img src="https://www.dailynews.co.th/wp-content/uploads/2021/12/YT.png" alt="YouTube"
-                            width="30">
-                        YouTube
-                    </a>
-                </li>
-                <li>
-                    <a href="https://open.spotify.com/artist/3aBwCcP4CB8M6S7YV8QkOg" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
-                            alt="Spotify" width="30">
-                        Spotify
-                    </a>
-                </li>
+                <% if (channels) { %>
+                    <% if (channels.instagram) { %>
+                        <li>
+                            <a href="https://www.instagram.com/<%= channels.instagram %>/" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                                    alt="Instagram" width="30">
+                                Instagram
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (channels.facebook) { %>
+                        <li>
+                            <a href="https://www.facebook.com/<%= channels.facebook %>" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                                    alt="Facebook" width="30">
+                                Facebook
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (channels.youtube) { %>
+                        <li>
+                            <a href="<%= channels.youtube %>" target="_blank">
+                                <img src="https://www.dailynews.co.th/wp-content/uploads/2021/12/YT.png" alt="YouTube"
+                                    width="30">
+                                YouTube
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (channels.spotify) { %>
+                        <li>
+                            <a href="<%= channels.spotify %>" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                                    alt="Spotify" width="30">
+                                Spotify
+                            </a>
+                        </li>
+                    <% } %>
+                <% } else { %>
+                    <li>No social media links available.</li>
+                <% } %>
             </ul>
         </div>
     </main>
+    <div class="footer-container">
+    </div>
 </body>
 
 </html>
-<div class="footer-container">
-</div>
