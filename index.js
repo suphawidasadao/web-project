@@ -119,6 +119,73 @@ app.get('/band/:id', async (req, res) => {
     }
 });
 
+app.get('/Tracking_channel/:id', async (req, res) => {
+    const bandId = req.params.id;
+    console.log('Accessing Tracking_channel with id:', bandId); // เพิ่มการล็อก
+
+    try {
+        // ดึงข้อมูลวงดนตรีจาก bands_database
+        const bandQuery = "SELECT * FROM bands_database WHERE id_bands = ?";
+        const [bandRows] = await dbConnection.execute(bandQuery, [bandId]);
+
+        if (bandRows.length === 0) {
+            console.log('Band not found');
+            return res.status(404).send('วงดนตรีไม่พบ');
+        }
+
+        const band = bandRows[0];
+        console.log('Band:', band);
+
+        // ดึงข้อมูลศิลปินจาก artist_database ที่เกี่ยวข้องกับ id_bands
+        const artistsQuery = "SELECT * FROM artist_database WHERE id_bands = ?";
+        const [artistRows] = await dbConnection.execute(artistsQuery, [bandId]);
+
+        console.log('Artists:', artistRows);
+
+        // ดึงข้อมูลช่องทางสังคมจาก channels_database
+        const channelsQuery = "SELECT * FROM channels_database WHERE id_bands = ?";
+        const [channelRows] = await dbConnection.execute(channelsQuery, [bandId]);
+
+        console.log('Channels:', channelRows);
+
+        const channels = channelRows.length > 0 ? channelRows[0] : null;
+
+        // ส่งข้อมูลไปยัง view 'Tracking_channel.ejs'
+        res.render('Tracking_channel', { band: band, artists: artistRows, channels: channels });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('เกิดข้อผิดพลาดในการดึงข้อมูลวงดนตรีและศิลปิน');
+    }
+});
+
+app.get('/webboard/:id', (req, res) => {
+    const bandId = req.params.id;
+
+    // Fetch the band data from the database
+    getBandById(bandId, (error, band) => {
+        if (error) {
+            console.error("Error fetching band:", error);
+            return res.status(500).send("Error fetching band details");
+        }
+
+        // Check if the band was found
+        if (!band) {
+            console.error("Band not found for ID:", bandId); // Log bandId for debugging
+            return res.status(404).send("Band not found");
+        }
+
+        // Log the band object for debugging
+        console.log("Band object:", band);
+
+        // Render the webboard.ejs template with the band data
+        res.render('webboard', { band }); // Pass the band object to EJS
+    });
+});
+
+
+
+
+
 // เส้นทางสำหรับค้นหาวงดนตรี
 app.get('/search', (req, res) => { 
     const searchTerm = req.query.q; // รับคำค้นจาก query parameter 'q'
@@ -329,9 +396,9 @@ app.get('/webboard', (req, res) => {
     res.render('webboard'); // render webboard.ejs
 });
 
-app.get('/Tracking_channel', (req, res) => {
-    res.render('Tracking_channel'); // render Tracking_channel.ejs
-});
+// app.get('/Tracking_channel', (req, res) => {
+//     res.render('Tracking_channel'); // render Tracking_channel.ejs
+// });
 
 app.get('/song', (req, res) => {
     res.render('song'); // render song.ejs
@@ -351,3 +418,23 @@ app.use('/', (req, res) => {
 });
 
 app.listen(3000, () => console.log("Server is Running..."));
+app.get('/search', async (req, res) => {
+    const searchTerm = req.query.q;  // รับค่าคำค้นหาจาก URL
+    try {
+        // ค้นหาจากฐานข้อมูล (แทนที่ด้วยคำสั่งค้นหาของคุณ)
+        const bands = await db.query('SELECT * FROM bands WHERE band_name LIKE ?', [`%${searchTerm}%`]);
+
+        // ส่งผลลัพธ์ไปยังหน้าผลลัพธ์
+        res.render('search', {
+            bands: bands,  // ผลลัพธ์จากฐานข้อมูล
+            searchTerm: searchTerm,  // คำค้นหาที่ใช้
+            message: bands.length > 0 ? null : 'ไม่พบวงดนตรีที่ตรงกับคำค้นหา'
+        });
+    } catch (error) {
+        res.render('search', {
+            bands: [],
+            searchTerm: searchTerm,
+            message: 'เกิดข้อผิดพลาดในการค้นหา'
+        });
+    }
+});
